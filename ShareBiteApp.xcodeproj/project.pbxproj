@@ -1,0 +1,666 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC352C10AFEE00732195 /* ShareBiteAppApp.swift */; };
+		CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC372C10AFEE00732195 /* ContentView.swift */; };
+		CE33BC3A2C10AFF100732195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE33BC392C10AFF100732195 /* Assets.xcassets */; };
+		CE33BC3D2C10AFF100732195 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE33BC3C2C10AFF100732195 /* Preview Assets.xcassets */; };
+		CE33BC472C10AFF100732195 /* ShareBiteAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC462C10AFF100732195 /* ShareBiteAppTests.swift */; };
+		CE33BC512C10AFF100732195 /* ShareBiteAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC502C10AFF100732195 /* ShareBiteAppUITests.swift */; };
+		CE33BC532C10AFF100732195 /* ShareBiteAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC522C10AFF100732195 /* ShareBiteAppUITestsLaunchTests.swift */; };
+		CE33BCA12C19D0E600732195 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BCA02C19D0E600732195 /* FirebaseAuth */; };
+		CE33BCA32C19D1A300732195 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE33BCA22C19D1A300732195 /* GoogleService-Info.plist */; };
+		CE33BCA52C19D41800732195 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BCA42C19D41800732195 /* SignInView.swift */; };
+		CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BCA62C19D4C700732195 /* SignUpView.swift */; };
+		CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BCA82C19D51200732195 /* SplashScreenView.swift */; };
+		CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BCAC2C19E50200732195 /* DashboardView.swift */; };
+		CE33BD342C232C5400732195 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD332C232C5400732195 /* Users.swift */; };
+		CE33BD362C232CF800732195 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD352C232CF800732195 /* UserManager.swift */; };
+		CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD372C232D7500732195 /* FirebaseDatabase */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CE33BC432C10AFF100732195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE33BC2A2C10AFEE00732195 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE33BC312C10AFEE00732195;
+			remoteInfo = ShareBiteApp;
+		};
+		CE33BC4D2C10AFF100732195 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CE33BC2A2C10AFEE00732195 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CE33BC312C10AFEE00732195;
+			remoteInfo = ShareBiteApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CE33BC322C10AFEE00732195 /* ShareBiteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareBiteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE33BC352C10AFEE00732195 /* ShareBiteAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBiteAppApp.swift; sourceTree = "<group>"; };
+		CE33BC372C10AFEE00732195 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		CE33BC392C10AFF100732195 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CE33BC3C2C10AFF100732195 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CE33BC422C10AFF100732195 /* ShareBiteAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareBiteAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE33BC462C10AFF100732195 /* ShareBiteAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBiteAppTests.swift; sourceTree = "<group>"; };
+		CE33BC4C2C10AFF100732195 /* ShareBiteAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShareBiteAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE33BC502C10AFF100732195 /* ShareBiteAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBiteAppUITests.swift; sourceTree = "<group>"; };
+		CE33BC522C10AFF100732195 /* ShareBiteAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBiteAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CE33BCA22C19D1A300732195 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		CE33BCA42C19D41800732195 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		CE33BCA62C19D4C700732195 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		CE33BCA82C19D51200732195 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		CE33BCAC2C19E50200732195 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		CE33BD332C232C5400732195 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		CE33BD352C232CF800732195 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CE33BC2F2C10AFEE00732195 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */,
+				CE33BCA12C19D0E600732195 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC3F2C10AFF100732195 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC492C10AFF100732195 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CE33BC292C10AFEE00732195 = {
+			isa = PBXGroup;
+			children = (
+				CE33BC342C10AFEE00732195 /* ShareBiteApp */,
+				CE33BC452C10AFF100732195 /* ShareBiteAppTests */,
+				CE33BC4F2C10AFF100732195 /* ShareBiteAppUITests */,
+				CE33BC332C10AFEE00732195 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CE33BC332C10AFEE00732195 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BC322C10AFEE00732195 /* ShareBiteApp.app */,
+				CE33BC422C10AFF100732195 /* ShareBiteAppTests.xctest */,
+				CE33BC4C2C10AFF100732195 /* ShareBiteAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CE33BC342C10AFEE00732195 /* ShareBiteApp */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BD322C232C2B00732195 /* Services */,
+				CE33BD312C232C1300732195 /* Models */,
+				CE33BCA22C19D1A300732195 /* GoogleService-Info.plist */,
+				CE33BC352C10AFEE00732195 /* ShareBiteAppApp.swift */,
+				CE33BC372C10AFEE00732195 /* ContentView.swift */,
+				CE33BC392C10AFF100732195 /* Assets.xcassets */,
+				CE33BC3B2C10AFF100732195 /* Preview Content */,
+				CE33BCA42C19D41800732195 /* SignInView.swift */,
+				CE33BCA62C19D4C700732195 /* SignUpView.swift */,
+				CE33BCA82C19D51200732195 /* SplashScreenView.swift */,
+				CE33BCAC2C19E50200732195 /* DashboardView.swift */,
+			);
+			path = ShareBiteApp;
+			sourceTree = "<group>";
+		};
+		CE33BC3B2C10AFF100732195 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BC3C2C10AFF100732195 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		CE33BC452C10AFF100732195 /* ShareBiteAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BC462C10AFF100732195 /* ShareBiteAppTests.swift */,
+			);
+			path = ShareBiteAppTests;
+			sourceTree = "<group>";
+		};
+		CE33BC4F2C10AFF100732195 /* ShareBiteAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BC502C10AFF100732195 /* ShareBiteAppUITests.swift */,
+				CE33BC522C10AFF100732195 /* ShareBiteAppUITestsLaunchTests.swift */,
+			);
+			path = ShareBiteAppUITests;
+			sourceTree = "<group>";
+		};
+		CE33BD312C232C1300732195 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BD332C232C5400732195 /* Users.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE33BD322C232C2B00732195 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CE33BD352C232CF800732195 /* UserManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CE33BC312C10AFEE00732195 /* ShareBiteApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE33BC562C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteApp" */;
+			buildPhases = (
+				CE33BC2E2C10AFEE00732195 /* Sources */,
+				CE33BC2F2C10AFEE00732195 /* Frameworks */,
+				CE33BC302C10AFEE00732195 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareBiteApp;
+			packageProductDependencies = (
+				CE33BCA02C19D0E600732195 /* FirebaseAuth */,
+				CE33BD372C232D7500732195 /* FirebaseDatabase */,
+			);
+			productName = ShareBiteApp;
+			productReference = CE33BC322C10AFEE00732195 /* ShareBiteApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CE33BC412C10AFF100732195 /* ShareBiteAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE33BC592C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteAppTests" */;
+			buildPhases = (
+				CE33BC3E2C10AFF100732195 /* Sources */,
+				CE33BC3F2C10AFF100732195 /* Frameworks */,
+				CE33BC402C10AFF100732195 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE33BC442C10AFF100732195 /* PBXTargetDependency */,
+			);
+			name = ShareBiteAppTests;
+			productName = ShareBiteAppTests;
+			productReference = CE33BC422C10AFF100732195 /* ShareBiteAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CE33BC4B2C10AFF100732195 /* ShareBiteAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CE33BC5C2C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteAppUITests" */;
+			buildPhases = (
+				CE33BC482C10AFF100732195 /* Sources */,
+				CE33BC492C10AFF100732195 /* Frameworks */,
+				CE33BC4A2C10AFF100732195 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CE33BC4E2C10AFF100732195 /* PBXTargetDependency */,
+			);
+			name = ShareBiteAppUITests;
+			productName = ShareBiteAppUITests;
+			productReference = CE33BC4C2C10AFF100732195 /* ShareBiteAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CE33BC2A2C10AFEE00732195 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					CE33BC312C10AFEE00732195 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					CE33BC412C10AFF100732195 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = CE33BC312C10AFEE00732195;
+					};
+					CE33BC4B2C10AFF100732195 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = CE33BC312C10AFEE00732195;
+					};
+				};
+			};
+			buildConfigurationList = CE33BC2D2C10AFEE00732195 /* Build configuration list for PBXProject "ShareBiteApp" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CE33BC292C10AFEE00732195;
+			packageReferences = (
+				CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = CE33BC332C10AFEE00732195 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CE33BC312C10AFEE00732195 /* ShareBiteApp */,
+				CE33BC412C10AFF100732195 /* ShareBiteAppTests */,
+				CE33BC4B2C10AFF100732195 /* ShareBiteAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CE33BC302C10AFEE00732195 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE33BC3D2C10AFF100732195 /* Preview Assets.xcassets in Resources */,
+				CE33BC3A2C10AFF100732195 /* Assets.xcassets in Resources */,
+				CE33BCA32C19D1A300732195 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC402C10AFF100732195 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC4A2C10AFF100732195 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CE33BC2E2C10AFEE00732195 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE33BCA52C19D41800732195 /* SignInView.swift in Sources */,
+				CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */,
+				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
+				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
+				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
+				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
+				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
+				CE33BD342C232C5400732195 /* Users.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC3E2C10AFF100732195 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE33BC472C10AFF100732195 /* ShareBiteAppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CE33BC482C10AFF100732195 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE33BC532C10AFF100732195 /* ShareBiteAppUITestsLaunchTests.swift in Sources */,
+				CE33BC512C10AFF100732195 /* ShareBiteAppUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CE33BC442C10AFF100732195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE33BC312C10AFEE00732195 /* ShareBiteApp */;
+			targetProxy = CE33BC432C10AFF100732195 /* PBXContainerItemProxy */;
+		};
+		CE33BC4E2C10AFF100732195 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CE33BC312C10AFEE00732195 /* ShareBiteApp */;
+			targetProxy = CE33BC4D2C10AFF100732195 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		CE33BC542C10AFF100732195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		CE33BC552C10AFF100732195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CE33BC572C10AFF100732195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ShareBiteApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CE33BC582C10AFF100732195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ShareBiteApp/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CE33BC5A2C10AFF100732195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareBiteApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ShareBiteApp";
+			};
+			name = Debug;
+		};
+		CE33BC5B2C10AFF100732195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ShareBiteApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ShareBiteApp";
+			};
+			name = Release;
+		};
+		CE33BC5D2C10AFF100732195 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ShareBiteApp;
+			};
+			name = Debug;
+		};
+		CE33BC5E2C10AFF100732195 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.ShareBiteAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ShareBiteApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CE33BC2D2C10AFEE00732195 /* Build configuration list for PBXProject "ShareBiteApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE33BC542C10AFF100732195 /* Debug */,
+				CE33BC552C10AFF100732195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE33BC562C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE33BC572C10AFF100732195 /* Debug */,
+				CE33BC582C10AFF100732195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE33BC592C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE33BC5A2C10AFF100732195 /* Debug */,
+				CE33BC5B2C10AFF100732195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CE33BC5C2C10AFF100732195 /* Build configuration list for PBXNativeTarget "ShareBiteAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CE33BC5D2C10AFF100732195 /* Debug */,
+				CE33BC5E2C10AFF100732195 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.27.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CE33BCA02C19D0E600732195 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		CE33BD372C232D7500732195 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = CE33BC2A2C10AFEE00732195 /* Project object */;
+}
