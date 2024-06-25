@@ -12,6 +12,8 @@ struct Users :Identifiable,Codable{
     var emailAddress : String
     var password : String
     var mobileNumber : String
-    var isDeleted = false
+    var profileDeleted = false
+    var notification = true
+    var createdOn = Date()
     
 }
