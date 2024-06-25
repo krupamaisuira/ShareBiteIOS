@@ -14,7 +14,10 @@ class UserManager : ObservableObject{
     
     func registerUser(_user: Users){
         let itemRef = database.child("users").child(_user.id)
-        itemRef.setValue(["userName":_user.userName,"emailAddress":_user.emailAddress,"password" : _user.password,"mobileNumber" : _user.mobileNumber,"isDeleted":_user.isDeleted]);
+        itemRef.setValue(["id" : _user.id,"userName": _user.userName,"email": _user.emailAddress,"password": _user.password,
+                          "mobileNumber": _user.mobileNumber,"profileDeleted": _user.profileDeleted,"notification": _user.notification,
+                          "createdOn" : _user.createdOn.timeIntervalSinceNow
+                         ]);
     }
     
 }
