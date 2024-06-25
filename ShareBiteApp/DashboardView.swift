@@ -108,7 +108,7 @@ struct DashboardView: View {
 
             Text("News")
                 .font(.headline)
-            .padding(.bottom, 5)
+            .padding(.bottom, 7)
             
             Divider()
             .background(Color.gray)
