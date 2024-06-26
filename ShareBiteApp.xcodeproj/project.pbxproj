@@ -23,6 +23,8 @@
 		CE33BD342C232C5400732195 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD332C232C5400732195 /* Users.swift */; };
 		CE33BD362C232CF800732195 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD352C232CF800732195 /* UserManager.swift */; };
 		CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD372C232D7500732195 /* FirebaseDatabase */; };
+		CE33BD3E2C2C4A2400732195 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */; };
+		CE33BD402C2C57DF00732195 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD3F2C2C57DF00732195 /* Utils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		CE33BCAC2C19E50200732195 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		CE33BD332C232C5400732195 /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		CE33BD352C232CF800732195 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		CE33BD3F2C2C57DF00732195 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 				CE33BCA62C19D4C700732195 /* SignUpView.swift */,
 				CE33BCA82C19D51200732195 /* SplashScreenView.swift */,
 				CE33BCAC2C19E50200732195 /* DashboardView.swift */,
+				CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				CE33BD352C232CF800732195 /* UserManager.swift */,
+				CE33BD3F2C2C57DF00732195 /* Utils.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -311,8 +317,10 @@
 				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
+				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
+				CE33BD3E2C2C4A2400732195 /* ForgotPasswordView.swift in Sources */,
 				CE33BD342C232C5400732195 /* Users.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
