@@ -24,42 +24,62 @@ struct SignUpView: View {
                     .frame(width: 200, height: 200)
                     .padding(10)
                 
-                Form {
+                VStack(spacing: 15) {
                     TextField("User Name", text: $userName)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
+                    
                     TextField("Mobile Number", text: $mobileNumber)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
+                    
                     TextField("Email Address", text: $emailAddress)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
                     
                     HStack {
                         if isPasswordVisible {
                             TextField("Password", text: $password)
+                                .padding()
                         } else {
                             SecureField("Password", text: $password)
+                                .padding()
                         }
                         Button(action: {
                             isPasswordVisible.toggle()
                         }) {
                             Image(systemName: isPasswordVisible ? "eye.slash.fill" : "eye.fill")
                                 .foregroundColor(.gray)
+                                .padding(10)
                         }
                     }
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(10)
                     
                     HStack {
                         if isConfPasswordVisible {
                             TextField("Confirm Password", text: $confirmPassword)
+                                .padding()
                         } else {
                             SecureField("Confirm Password", text: $confirmPassword)
+                                .padding()
                         }
                         Button(action: {
                             isConfPasswordVisible.toggle()
                         }) {
                             Image(systemName: isConfPasswordVisible ? "eye.slash.fill" : "eye.fill")
                                 .foregroundColor(.gray)
+                                .padding(10)
                         }
                     }
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(10)
                 }
+                .padding(.horizontal, 30)
                
-                .background(Color.clear)
-                    .cornerRadius(0)
                 HStack {
                     Button(action: {
                         isTermsAccepted.toggle()
@@ -71,6 +91,7 @@ struct SignUpView: View {
                         .font(.subheadline)
                         .foregroundColor(.gray)
                 }
+                .padding(.top, 20)
                 
                 Spacer()
                 
@@ -124,10 +145,18 @@ struct SignUpView: View {
             return
         }
         
-        let newUser = Users(userName: userName, emailAddress: emailAddress, password: password, mobileNumber: mobileNumber)
-        userManager.registerUser(_user: newUser)
+        Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
+                if let error = error {
+                    showAlert(message: error.localizedDescription)
+                    return
+                }
+                let newUser = Users(userName: userName, emailAddress: emailAddress, password: password, mobileNumber: mobileNumber)
+                userManager.registerUser(_user: newUser)
+                navigateToSignIn = true
+            }
         
-        navigateToSignIn = true
+        //Auth.auth().signIn(withEmail: emailAddress, password: password)
+       
     }
     
     private func showAlert(message: String) {
