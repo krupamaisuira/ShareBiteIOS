@@ -56,7 +56,7 @@ struct SignInView: View {
                     Text("Forgot Password?")
                         .foregroundColor(.gray)
                     
-                    NavigationLink(destination: SignUpView()) {
+                    NavigationLink(destination: ForgotPasswordView()) {
                         Text("Reset it here")
                             .foregroundColor(.blue)
                             .underline(true, color: .blue)
@@ -102,6 +102,20 @@ struct SignInView: View {
     }
     
     private func loginUser() {
+        if email.isEmpty || password.isEmpty {
+            showAlert(message: "Please fill in all fields.")
+            return
+        }
+        if !Utils.isValidEmail(email) {
+            showAlert(message: "Please enter a valid Email Address.")
+            return
+        }
+                
+        if !Utils.isPasswordValid(password) {
+                showAlert(message: "Password must contain at least one letter and one digit.")
+                return
+        }
+        
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
                 showAlert(message: error.localizedDescription)
