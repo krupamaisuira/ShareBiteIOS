@@ -124,6 +124,7 @@ struct SignUpView: View {
                 Alert(
                     title: Text("Registration Error"),
                     message: Text(alertMessage),
+//                    hgd
                     dismissButton: .default(Text("OK"))
                 )
             }
