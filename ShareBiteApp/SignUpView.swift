@@ -135,7 +135,19 @@ struct SignUpView: View {
             showAlert(message: "Please fill in all fields.")
             return
         }
-        
+        if mobileNumber.count != 10 {
+            showAlert(message: "Mobile Number should be 10 digits.")
+            return
+        }
+        if !Utils.isValidEmail(emailAddress) {
+            showAlert(message: "Please enter a valid Email Address.")
+            return
+        }
+                
+        if !Utils.isPasswordValid(password) {
+                showAlert(message: "Password must contain at least one letter and one digit.")
+                return
+        }
         if password != confirmPassword {
             showAlert(message: "Passwords do not match.")
             return
@@ -146,16 +158,26 @@ struct SignUpView: View {
         }
         
         Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
-                if let error = error {
-                    showAlert(message: error.localizedDescription)
-                    return
+                if let error = error as NSError?{
+                    let errorCode = error.code
+                    switch errorCode {
+                           case AuthErrorCode.emailAlreadyInUse.rawValue:
+                               showAlert(message: "The email address is already in use.")
+                               return
+                           case AuthErrorCode.weakPassword.rawValue:
+                               showAlert(message: "The password is too weak.")
+                               return
+                           default:
+                               showAlert(message: error.localizedDescription)
+                               return
+                           }
                 }
-                let newUser = Users(userName: userName, emailAddress: emailAddress, password: password, mobileNumber: mobileNumber)
+                let newUser = Users(userName: userName, emailAddress: emailAddress, mobileNumber: mobileNumber)
                 userManager.registerUser(_user: newUser)
                 navigateToSignIn = true
             }
         
-        //Auth.auth().signIn(withEmail: emailAddress, password: password)
+       
        
     }
     
