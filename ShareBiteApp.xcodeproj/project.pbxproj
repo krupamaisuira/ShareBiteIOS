@@ -27,6 +27,7 @@
 		CE33BD402C2C57DF00732195 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD3F2C2C57DF00732195 /* Utils.swift */; };
 		CE33BD422C2C66ED00732195 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD412C2C66ED00732195 /* SessionManager.swift */; };
 		CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD432C2F2E9300732195 /* FirebaseFirestore */; };
+		CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD462C2F463B00732195 /* ProfileView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		CE33BD3F2C2C57DF00732195 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		CE33BD412C2C66ED00732195 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		CE33BD462C2F463B00732195 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 				CE33BCA82C19D51200732195 /* SplashScreenView.swift */,
 				CE33BCAC2C19E50200732195 /* DashboardView.swift */,
 				CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */,
+				CE33BD462C2F463B00732195 /* ProfileView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */,
 				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
+				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,

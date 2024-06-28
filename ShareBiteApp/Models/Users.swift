@@ -7,10 +7,9 @@
 
 import Foundation
 struct Users :Identifiable,Codable{
-    var id : String = UUID().uuidString
+    var id : String
     var username : String
-    var email : String
-    
+    var email : String    
     var mobilenumber : String
     var profiledeleted = false
     var notification = true
@@ -18,12 +17,8 @@ struct Users :Identifiable,Codable{
     
 }
 struct SessionUsers :Identifiable,Codable{
-    var id : String 
+    var id : String
     var username : String
     var email : String
-    
-   
     var notification = true
-  
-    
 }
