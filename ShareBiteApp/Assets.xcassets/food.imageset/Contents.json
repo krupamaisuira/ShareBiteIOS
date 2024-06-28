@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "food-donation-ads-design-template-4e6a503eeb446fca76cb5943b9aab966_screen.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
