@@ -8,12 +8,22 @@
 import Foundation
 struct Users :Identifiable,Codable{
     var id : String = UUID().uuidString
-    var userName : String
-    var emailAddress : String
+    var username : String
+    var email : String
     
-    var mobileNumber : String
-    var profileDeleted = false
+    var mobilenumber : String
+    var profiledeleted = false
     var notification = true
-    var createdOn = Date()
+    var createdon = Date()
+    
+}
+struct SessionUsers :Identifiable,Codable{
+    var id : String 
+    var username : String
+    var email : String
+    
+   
+    var notification = true
+  
     
 }
