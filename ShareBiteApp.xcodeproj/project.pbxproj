@@ -22,10 +22,11 @@
 		CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BCAC2C19E50200732195 /* DashboardView.swift */; };
 		CE33BD342C232C5400732195 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD332C232C5400732195 /* Users.swift */; };
 		CE33BD362C232CF800732195 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD352C232CF800732195 /* UserManager.swift */; };
-		CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD372C232D7500732195 /* FirebaseDatabase */; };
+		CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD372C232D7500732195 /* FirebaseDatabase */; settings = {ATTRIBUTES = (Required, ); }; };
 		CE33BD3E2C2C4A2400732195 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */; };
 		CE33BD402C2C57DF00732195 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD3F2C2C57DF00732195 /* Utils.swift */; };
 		CE33BD422C2C66ED00732195 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD412C2C66ED00732195 /* SessionManager.swift */; };
+		CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD432C2F2E9300732195 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 			files = (
 				CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */,
 				CE33BCA12C19D0E600732195 /* FirebaseAuth in Frameworks */,
+				CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +104,7 @@
 				CE33BC452C10AFF100732195 /* ShareBiteAppTests */,
 				CE33BC4F2C10AFF100732195 /* ShareBiteAppUITests */,
 				CE33BC332C10AFEE00732195 /* Products */,
+				CE33BD452C2F315900732195 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +180,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		CE33BD452C2F315900732195 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -196,6 +206,7 @@
 			packageProductDependencies = (
 				CE33BCA02C19D0E600732195 /* FirebaseAuth */,
 				CE33BD372C232D7500732195 /* FirebaseDatabase */,
+				CE33BD432C2F2E9300732195 /* FirebaseFirestore */,
 			);
 			productName = ShareBiteApp;
 			productReference = CE33BC322C10AFEE00732195 /* ShareBiteApp.app */;
@@ -671,6 +682,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		CE33BD432C2F2E9300732195 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

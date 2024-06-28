@@ -121,18 +121,18 @@ struct SignInView: View {
                 showAlert(message: error.localizedDescription)
             } else {
                 let sessionManager = SessionManager.shared
-                sessionManager.loginUser(email: email) { success in
-                    if success {
-                        // Successful login
-                        print("User logged in!")
-                        navigateToDashboard = true
-                        
-                    } else {
-                        print("Something wrong ")
-                        
-                    }
-                }
-                
+//                sessionManager.loginUser(email: email) { success in
+//                    if success {
+//                        // Successful login
+//                        print("User logged in!")
+//                        navigateToDashboard = true
+//                        
+//                    } else {
+//                        print("Something wrong ")
+//                        
+//                    }
+//                }
+//                
                
             }
         }

@@ -20,40 +20,41 @@ class UserManager : ObservableObject{
                          ]);
     }
     
-    func fetchUserByEmail(email: String, completion: @escaping (SessionUsers?) -> Void) {
-        let usersRef = Firestore.firestore().collection("users")
-        
-        usersRef.whereField("email", isEqualTo: email)
-                .whereField("profileDeleted", isEqualTo: false)
-                .getDocuments { (querySnapshot, error) in
-                    if let error = error {
-                        print("Error fetching user: \(error.localizedDescription)")
-                        completion(nil)
-                        return
-                    }
-                    
-                    if let documents = querySnapshot?.documents {
-                        if documents.count == 1 {
-                            let document = documents[0]
-                            let userData = document.data()
-                            
-                            
-                            let user = SessionUsers(id: document.documentID,
-                                             username: userData["username"] as? String ?? "",
-                                             email: userData["email"] as? String ?? "",
-                                             notification: userData["notification"] as? Bool ?? true)
-                            
-                            completion(user)
-                        } else {
-                            print("More than one document found or no documents matched the query")
-                            completion(nil)
-                        }
-                    } else {
-                        print("No documents found")
-                        completion(nil)
-                    }
-                }
-    }
+//    func fetchUserByEmail(email: String, completion: @escaping (SessionUsers?) -> Void) {
+//        
+//        let usersRef = Firestore.firestore().collection("users")
+//        
+//        usersRef.whereField("email", isEqualTo: email)
+//                .whereField("profileDeleted", isEqualTo: false)
+//                .getDocuments { (querySnapshot, error) in
+//                    if let error = error {
+//                        print("Error fetching user: \(error.localizedDescription)")
+//                        completion(nil)
+//                        return
+//                    }
+//                    
+//                    if let documents = querySnapshot?.documents {
+//                        if documents.count == 1 {
+//                            let document = documents[0]
+//                            let userData = document.data()
+//                            
+//                            
+//                            let user = SessionUsers(id: document.documentID,
+//                                             username: userData["username"] as? String ?? "",
+//                                             email: userData["email"] as? String ?? "",
+//                                             notification: userData["notification"] as? Bool ?? true)
+//                            
+//                            completion(user)
+//                        } else {
+//                            print("More than one document found or no documents matched the query")
+//                            completion(nil)
+//                        }
+//                    } else {
+//                        print("No documents found")
+//                        completion(nil)
+//                    }
+//                }
+//    }
 
     
 }
