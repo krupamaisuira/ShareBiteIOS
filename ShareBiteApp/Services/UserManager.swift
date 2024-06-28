@@ -7,54 +7,55 @@
 
 import Foundation
 import FirebaseDatabase
+import Firebase
 
 class UserManager : ObservableObject{
     
     private let database = Database.database().reference();
     
+    private let _collection = "users";
     func registerUser(_user: Users){
-        let itemRef = database.child("users").child(_user.id)
-        itemRef.setValue(["id" : _user.id,"username": _user.username,"email": _user.email,
+        let itemRef = database.child(_collection).child(_user.id)
+        itemRef.setValue(["userid" : _user.id,"username": _user.username,"email": _user.email,
                           "mobilenumber": _user.mobilenumber,"profiledeleted": _user.profiledeleted,"notification": _user.notification,
                           "createdon" : _user.createdon.timeIntervalSinceNow
                          ]);
     }
-    
-//    func fetchUserByEmail(email: String, completion: @escaping (SessionUsers?) -> Void) {
-//        
-//        let usersRef = Firestore.firestore().collection("users")
-//        
-//        usersRef.whereField("email", isEqualTo: email)
-//                .whereField("profileDeleted", isEqualTo: false)
-//                .getDocuments { (querySnapshot, error) in
-//                    if let error = error {
-//                        print("Error fetching user: \(error.localizedDescription)")
-//                        completion(nil)
-//                        return
-//                    }
-//                    
-//                    if let documents = querySnapshot?.documents {
-//                        if documents.count == 1 {
-//                            let document = documents[0]
-//                            let userData = document.data()
-//                            
-//                            
-//                            let user = SessionUsers(id: document.documentID,
-//                                             username: userData["username"] as? String ?? "",
-//                                             email: userData["email"] as? String ?? "",
-//                                             notification: userData["notification"] as? Bool ?? true)
-//                            
-//                            completion(user)
-//                        } else {
-//                            print("More than one document found or no documents matched the query")
-//                            completion(nil)
-//                        }
-//                    } else {
-//                        print("No documents found")
-//                        completion(nil)
-//                    }
-//                }
-//    }
+    func fetchUserByUserID(withID id: String, completion: @escaping (SessionUsers?) -> Void) {
+        let usersRef = database.child("users")
+        
+        usersRef.child(id)
+            .observeSingleEvent(of: .value) { snapshot in
+                if snapshot.exists() {
+                    print("Snapshot exists: \(snapshot)")
+                    
+                    if let userData = snapshot.value as? [String: Any] {
+                        print("data parse started")
+                       
+                        let username = userData["username"] as? String ?? ""
+                        let email = userData["email"] as? String ?? ""
+                        let notification = userData["notification"] as? Bool ?? true
+                        
+                       
+                        let user = SessionUsers(id: id,
+                                                username: username,
+                                                email: email,
+                                                notification: notification)
+                        
+                        completion(user)
+                    } else {
+                        print("Failed to parse user data for id: \(id)")
+                        completion(nil)
+                    }
+                } else {
+                    print("No user found for id: \(id)")
+                    completion(nil)
+                }
+            }
+    }
+
+
+
 
     
 }

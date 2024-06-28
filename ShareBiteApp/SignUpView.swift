@@ -173,9 +173,15 @@ struct SignUpView: View {
                                return
                            }
                 }
-                let newUser = Users(username: userName, email: emailAddress, mobilenumber: mobileNumber)
-                userManager.registerUser(_user: newUser)
-                navigateToSignIn = true
+                if let user = authResult?.user {
+                    
+                    let userID = user.uid
+                    let newUser = Users(id : userID,username: userName, email: emailAddress, mobilenumber: mobileNumber)
+                    userManager.registerUser(_user: newUser)
+                    
+                    navigateToSignIn = true
+                }
+                
             }
         
        
