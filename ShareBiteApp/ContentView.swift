@@ -2,7 +2,7 @@ import SwiftUI
 import Firebase
 
 struct ContentView: View {
-    @State private var showSplashScreen = true
+    @State private var showSplashScreen = false
     @State private var isShowingSignUP = false
     @State private var alertMessage = ""
     @State private var isShowingAlert = false
@@ -14,12 +14,16 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             ZStack {
-                SignInView()
-                    .opacity(showSplashScreen ? 0 : 1)
-                if showSplashScreen{
-                    SplashScreenView()
-                        .transition(.identity)
-                }
+                if isAuthenticated {
+                                    ProfileView()
+                                } else {
+                                    SignInView()
+                                        .opacity(showSplashScreen ? 0 : 1)
+                                }
+                                if showSplashScreen {
+                                    SplashScreenView()
+                                        .transition(.opacity)
+                                }
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
@@ -27,24 +31,24 @@ struct ContentView: View {
                         showSplashScreen = false
                     }
                 }
+                checkAuthentication()
             }
            
-           
+            
         }
     }
-    
-    private func signInfunc() {
-        Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
-            if let error = error {
-                alertMessage = error.localizedDescription
-                isShowingAlert = true
-            } else {
-                // Handle successful sign-in
-                userEmail = email
-                isAuthenticated = true
+    private func checkAuthentication() {
+            Auth.auth().addStateDidChangeListener { auth, user in
+                if let _ = user {
+                    
+                    isAuthenticated = true
+                } else {
+                    
+                    isAuthenticated = false
+                }
             }
         }
-    }
+   
 }
 
 struct ContentView_Preview : PreviewProvider {

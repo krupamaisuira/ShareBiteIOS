@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct DashboardView: View {
-    var userEmail : String
+    
+    @StateObject private var sessionManager = SessionManager.shared
     var body: some View {
         VStack{
                        // Header
@@ -43,7 +44,10 @@ struct DashboardView: View {
                 .font(.headline)
                 .multilineTextAlignment(.center)
         
-      
+            if let username = sessionManager.getCurrentUser()?.username {
+                                Text(username) // Display username if available
+                                    .font(.body)
+                            }
         
         HStack {
                               VStack {
@@ -168,7 +172,7 @@ struct DashboardView: View {
 
 struct DashboardView_Preview : PreviewProvider{
     static var previews : some View {
-        DashboardView(userEmail: "test@gmaail.com")
+        DashboardView()
     }
     
 }

@@ -96,8 +96,12 @@ struct SignInView: View {
                 )
             }
             .fullScreenCover(isPresented: $navigateToDashboard, content: {
-                DashboardView(userEmail: email)
-            })
+                            ProfileView()
+                                .onDisappear() {
+                                  
+                                    navigateToDashboard = false
+                                }
+                        })
         }
     }
     
@@ -112,31 +116,29 @@ struct SignInView: View {
         }
                 
         if !Utils.isPasswordValid(password) {
-                showAlert(message: "Password must contain at least one letter and one digit.")
-                return
+            showAlert(message: "Password must contain at least one letter and one digit.")
+            return
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { authResult, error in
             if let error = error {
-                showAlert(message: error.localizedDescription)
+                self.showAlert(message: error.localizedDescription)
+            } else if let authResult = authResult {
+                let userID = authResult.user.uid
+                print(userID)
+                SessionManager.shared.loginUser(userid: userID) { success in
+                    if success {
+                        self.navigateToDashboard = true
+                    } else {
+                        self.showAlert(message: "Failed to log in. Please try again later.")
+                    }
+                }
             } else {
-                let sessionManager = SessionManager.shared
-//                sessionManager.loginUser(email: email) { success in
-//                    if success {
-//                        // Successful login
-//                        print("User logged in!")
-//                        navigateToDashboard = true
-//                        
-//                    } else {
-//                        print("Something wrong ")
-//                        
-//                    }
-//                }
-//                
-               
+                self.showAlert(message: "Authentication failed. Please try again later.")
             }
         }
     }
+
     
     private func showAlert(message: String) {
         alertMessage = message

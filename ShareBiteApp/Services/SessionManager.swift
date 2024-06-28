@@ -6,7 +6,9 @@
 //
 
 import Foundation
-class SessionManager {
+import Firebase
+
+class SessionManager : ObservableObject {
     static let shared = SessionManager()
     
     private let userManager = UserManager()
@@ -17,22 +19,30 @@ class SessionManager {
         return currentUser != nil
     }
     
-//    func loginUser(email: String, completion: @escaping (Bool) -> Void) {
-//        userManager.fetchUserByEmail(email: email) { [weak self] (user) in
-//            if let user = user {
-//
-//                self?.currentUser = user
-//                completion(true)
-//            } else {
-//
-//                self?.currentUser = nil
-//                completion(false)
-//            }
-//        }
-//    }
-//
+    func loginUser(userid: String, completion: @escaping (Bool) -> Void) {
+        userManager.fetchUserByUserID(withID : userid) { [weak self] (user) in
+            if let user = user {
+
+                self?.currentUser = user
+                completion(true)
+            } else {
+
+                self?.currentUser = nil
+                completion(false)
+            }
+        }
+    }
+
     func logoutUser() {
-        currentUser = nil
+        
+        do {
+                    try Auth.auth().signOut()
+                    currentUser = nil
+                    
+                } catch {
+                    print("Error signing out: \(error.localizedDescription)")
+                }
+        
        
     }
     
