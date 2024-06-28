@@ -173,7 +173,7 @@ struct SignUpView: View {
                                return
                            }
                 }
-                let newUser = Users(userName: userName, emailAddress: emailAddress, mobileNumber: mobileNumber)
+                let newUser = Users(username: userName, email: emailAddress, mobilenumber: mobileNumber)
                 userManager.registerUser(_user: newUser)
                 navigateToSignIn = true
             }
