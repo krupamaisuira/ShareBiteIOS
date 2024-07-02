@@ -20,7 +20,7 @@ struct ProfileView: View {
                         
                         Text("Krupa Maisuria")
                             .font(.title)
-                            .padding(.leading, 10) // Add padding to adjust the position of the text
+                            .padding(.leading, 10)
                     }
                     .padding(5)
                     
@@ -54,11 +54,13 @@ struct ProfileView: View {
                     Divider()
                         .background(Color.gray)
                     
-                    HStack {
-                        Text("Change Password")
-                        
-                        Spacer() // Push text to the right edge
-                    }
+                    NavigationLink(destination: ChangePasswordView()) {
+                                            HStack {
+                                                Text("Change Password")
+                                                    .foregroundColor(.black)
+                                                
+                                            }
+                                        }
                     .padding()
                     
                     Divider()
