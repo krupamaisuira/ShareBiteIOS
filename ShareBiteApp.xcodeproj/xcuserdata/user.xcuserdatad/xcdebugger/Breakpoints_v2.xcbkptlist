@@ -18,36 +18,6 @@
             endingLineNumber = "23"
             landmarkName = "loginUser(userid:completion:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "83A3D39E-6794-4CEF-9BE3-B83801571DA6 - 9b88812b4cff420c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ShareBiteApp.SessionManager.loginUser(userid: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "ShareBiteApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Desktop/ShareBiteApp/ShareBiteApp/Services/SessionManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23">
-               </Location>
-               <Location
-                  uuid = "83A3D39E-6794-4CEF-9BE3-B83801571DA6 - 65f6f7918a551ca9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Optional&lt;ShareBiteApp.SessionUsers&gt;) -&gt; () in ShareBiteApp.SessionManager.loginUser(userid: Swift.String, completion: (Swift.Bool) -&gt; ()) -&gt; ()"
-                  moduleName = "ShareBiteApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/user/Desktop/ShareBiteApp/ShareBiteApp/Services/SessionManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "23"
-                  endingLineNumber = "23">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
