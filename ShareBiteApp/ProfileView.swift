@@ -10,17 +10,26 @@ import SwiftUI
 struct ProfileView: View {
     @StateObject private var sessionManager = SessionManager.shared
     @State private var isLoggedOut = false
+    @State private var showConfirmationDialog = false
+    @StateObject private var userManager = UserManager()
+    
     var body: some View {
         NavigationView {
             ZStack {
-                VStack(alignment: .leading) { // Align VStack content to the leading edge
+                VStack(alignment: .leading) {
                     HStack {
                         Image(systemName: "person.circle.fill")
                             .font(.largeTitle)
                         
-                        Text("Krupa Maisuria")
-                            .font(.title)
-                            .padding(.leading, 10)
+                        if let currentUser = sessionManager.getCurrentUser() {
+                                                    Text(currentUser.username)
+                                                        .font(.title)
+                                                        .padding(.leading, 10)
+                                                } else {
+                                                    Text("Unknown User")
+                                                        .font(.title)
+                                                        .padding(.leading, 10)
+                                                }
                     }
                     .padding(5)
                     
@@ -43,9 +52,9 @@ struct ProfileView: View {
                     HStack {
                         Text("Activate notifications")
                         
-                        Spacer() // Push Toggle to the right edge
+                        Spacer()
                         Toggle(isOn: .constant(true)) {
-                            // No action needed here
+                           
                         }
                         .toggleStyle(SwitchToggleStyle(tint: Color(.systemGreen)))
                         .padding(.trailing)
@@ -67,11 +76,24 @@ struct ProfileView: View {
                         .background(Color.gray)
                     
                     HStack {
-                        Text("Delete Profile")
-                        
-                        Spacer() // Push text to the right edge
-                    }
-                    .padding()
+                                            Button(action: {
+                                                showConfirmationDialog = true
+                                            }) {
+                                                Text("Delete Profile")
+                                                    .foregroundColor(.black)
+                                            }
+                                            .padding()
+                                            .alert("Are you sure you want to delete your profile?", isPresented: $showConfirmationDialog) {
+                                                Button("Cancel", role: .cancel) {}
+                                                Button("OK") {
+                                                    userManager.deleteProfile()
+                                                    sessionManager.logoutUser()
+                                                    isLoggedOut = true
+                                                }
+                                            }
+                                            
+                                            Spacer()
+                                        }
                     
                     Divider()
                         .background(Color.gray)

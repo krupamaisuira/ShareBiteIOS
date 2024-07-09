@@ -54,8 +54,32 @@ class UserManager : ObservableObject{
             }
     }
 
+    func deleteProfile() {
+        if let user = Auth.auth().currentUser {
+            let userId = user.uid
+            let ref = Database.database().reference().child(_collection).child(userId)
+            
+            ref.child("profiledeleted").setValue(true) { error, _ in
+                if let error = error {
+                    print("Error updating profile deleted status: \(error.localizedDescription)")
+                } else {
+                    print("Profile deleted status updated successfully.")
+                    user.delete { error in
+                        if let error = error {
+                            print("Error deleting user: \(error.localizedDescription)")
+                        } else {
+                            print("User deleted successfully.")
+                            
+                        }
+                    }
+                }
+            }
+        } else {
+            print("User ID not available.")
+        }
+    }
 
-
+  
 
     
 }
