@@ -12,6 +12,7 @@ struct ProfileView: View {
     @State private var isLoggedOut = false
     @State private var showConfirmationDialog = false
     @StateObject private var userManager = UserManager()
+    @State private var notificationsEnabled = false
     
     var body: some View {
         NavigationView {
@@ -50,15 +51,24 @@ struct ProfileView: View {
                         .background(Color.gray)
                     
                     HStack {
-                        Text("Activate notifications")
-                        
-                        Spacer()
-                        Toggle(isOn: .constant(true)) {
-                           
-                        }
-                        .toggleStyle(SwitchToggleStyle(tint: Color(.systemGreen)))
-                        .padding(.trailing)
-                    }
+                                Text("Activate notifications")
+                                
+                                Spacer()
+                                
+                                Toggle(isOn: $notificationsEnabled) {
+                                    Text("")
+                                }
+                                .toggleStyle(SwitchToggleStyle(tint: Color(.systemGreen)))
+                                .padding(.trailing)
+                            }
+                           .onAppear {
+                                       
+                                       notificationsEnabled = sessionManager.getCurrentUser()?.notification ?? false
+                                   }
+                            .onChange(of: notificationsEnabled) { newValue in
+                               
+                                userManager.notificationSetting(notification: newValue)
+                            }
                     .padding()
                     Divider()
                         .background(Color.gray)

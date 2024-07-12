@@ -45,6 +45,13 @@ class SessionManager : ObservableObject {
         
        
     }
+    func updateNotificationSetting(notification: Bool) {
+            if var currentUser = currentUser {
+                currentUser.notification = notification
+                self.currentUser = currentUser  // Update the property
+            }
+        }
+        
     
     func getCurrentUser() -> SessionUsers? {
         return currentUser

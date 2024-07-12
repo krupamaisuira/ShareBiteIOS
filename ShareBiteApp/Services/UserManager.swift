@@ -12,7 +12,7 @@ import Firebase
 class UserManager : ObservableObject{
     
     private let database = Database.database().reference();
-    
+  //  private let sessionManager = SessionManager()
     private let _collection = "users";
     func registerUser(_user: Users){
         let itemRef = database.child(_collection).child(_user.id)
@@ -79,7 +79,23 @@ class UserManager : ObservableObject{
         }
     }
 
-  
+    func notificationSetting(notification : Bool) {
+        if let user = Auth.auth().currentUser {
+            let userId = user.uid
+            let ref = Database.database().reference().child(_collection).child(userId)
+            
+            ref.child("notification").setValue(notification) { error, _ in
+                if let error = error {
+                    print("Error updating notification status: \(error.localizedDescription)")
+                } else {
+                    print("notification setting updated successfully.")
+                    SessionManager.shared.updateNotificationSetting(notification: notification)
+                }
+            }
+        } else {
+            print("User ID not available.")
+        }
+    }
 
     
 }
