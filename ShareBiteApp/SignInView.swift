@@ -96,7 +96,7 @@ struct SignInView: View {
                 )
             }
             .fullScreenCover(isPresented: $navigateToDashboard, content: {
-                            ProfileView()
+                            DashboardView()
                                 .onDisappear() {
                                   
                                     navigateToDashboard = false

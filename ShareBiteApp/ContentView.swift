@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationView{
             ZStack {
                 if isAuthenticated {
-                                    ProfileView()
+                                    DashboardView()
                                 } else {
                                     SignInView()
                                         .opacity(showSplashScreen ? 0 : 1)
