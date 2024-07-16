@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct BottomNavigationView: View {
-    @State private var selectedTab = 0
+    @State public var selectedTab : Int
     
     let tabBarItems = [
         TabBarItem(systemImage: "house", text: "Dashboard"),
@@ -60,9 +60,3 @@ struct TabBarItem {
 }
 
 
-
-struct BottomNavigationView_Previews: PreviewProvider {
-    static var previews: some View {
-        BottomNavigationView()
-    }
-}
