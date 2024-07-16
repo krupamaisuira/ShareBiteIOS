@@ -10,24 +10,26 @@ struct ContentView: View {
     @State private var userEmail = ""
     @State private var email : String = ""
     @State private var password : String = ""
-    
+    @State private var selectedTab = 0
     var body: some View {
         NavigationView{
-            ZStack {
+            VStack {
                 if isAuthenticated {
-                                    DashboardView()
+                                  HeaderView(selectedTab: $selectedTab)
+                                    Divider().background(Color.blue)
+                                  BottomNavigationView(selectedTab : selectedTab)
+                                    Spacer()
                                 } else {
                                     SignInView()
                                         .opacity(showSplashScreen ? 0 : 1)
                                 }
                                 if showSplashScreen {
-                                    SplashScreenView()
+                                    SplashScreenView()      
                                         .transition(.opacity)
                                 }
-                if isAuthenticated {
-                    BottomNavigationView()
-                                }
+                
             }
+            .background(Color.white.edgesIgnoringSafeArea(.all))
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     withAnimation {

@@ -18,6 +18,7 @@ struct ProfileView: View {
         NavigationView {
             ZStack {
                 VStack(alignment: .leading) {
+                   
                     HStack {
                         Image(systemName: "person.circle.fill")
                             .font(.largeTitle)
@@ -41,6 +42,9 @@ struct ProfileView: View {
                         .padding(10)
                         .font(.callout)
                         .multilineTextAlignment(.leading)
+                                                .lineLimit(nil)
+                                                .fixedSize(horizontal: false, vertical: true)
+
                     
                     Text("My settings")
                         .font(.title2)
@@ -131,10 +135,14 @@ struct ProfileView: View {
                     Text("Your donation can help feed families in need. Every contribution, big or small, makes a significant impact. Together, we can fight hunger and ensure that no one goes without a meal.")
                         .font(.caption)
                         .multilineTextAlignment(.center)
+                                                .lineLimit(nil)
+                                                .fixedSize(horizontal: false, vertical: true)
+
                         .padding()
                 }
-                .padding() // Add padding to VStack content
-            }
+                .padding()
+                .padding(.top,14) // Add padding to VStack content
+            }.padding(.top,20)
             .navigationTitle("")
             .navigationBarHidden(true)
             .background(
