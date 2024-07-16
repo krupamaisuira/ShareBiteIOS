@@ -24,6 +24,9 @@ struct ContentView: View {
                                     SplashScreenView()
                                         .transition(.opacity)
                                 }
+                if isAuthenticated {
+                    BottomNavigationView()
+                                }
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 3) {

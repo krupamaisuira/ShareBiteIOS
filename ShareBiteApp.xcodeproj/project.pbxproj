@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */; };
 		CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC352C10AFEE00732195 /* ShareBiteAppApp.swift */; };
 		CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BC372C10AFEE00732195 /* ContentView.swift */; };
 		CE33BC3A2C10AFF100732195 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE33BC392C10AFF100732195 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		CE33BC322C10AFEE00732195 /* ShareBiteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShareBiteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE33BC352C10AFEE00732195 /* ShareBiteAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareBiteAppApp.swift; sourceTree = "<group>"; };
 		CE33BC372C10AFEE00732195 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				CE33BD3D2C2C4A2400732195 /* ForgotPasswordView.swift */,
 				CE33BD462C2F463B00732195 /* ProfileView.swift */,
 				CE33BD482C3485CF00732195 /* ChangePasswordView.swift */,
+				CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
+				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
 				CE33BD3E2C2C4A2400732195 /* ForgotPasswordView.swift in Sources */,
 				CE33BD342C232C5400732195 /* Users.swift in Sources */,
