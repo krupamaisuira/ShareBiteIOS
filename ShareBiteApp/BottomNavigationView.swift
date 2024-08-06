@@ -1,62 +1,55 @@
 import SwiftUI
 
+import SwiftUI
+
 struct BottomNavigationView: View {
-    @State public var selectedTab : Int
-    
-    let tabBarItems = [
-        TabBarItem(systemImage: "house", text: "Dashboard"),
-        TabBarItem(systemImage: "cart", text: "Request Food"),
-        TabBarItem(systemImage: "arrow.up.circle.fill", text: "Donate Food"),
-        TabBarItem(systemImage: "list.bullet", text: "Donated Food"),
-        TabBarItem(systemImage: "person", text: "Profile")
-    ]
-    
+    @State public var selectedTab: Int
+
     var body: some View {
-        VStack(spacing: 0) {
-            TabView(selection: $selectedTab) {
-                DashboardView()
-                    .tag(0)
-                
-                request_food()
-                    .tag(1)
-                
-                DashboardView()
-                    .tag(2)
-                
-                ProfileView()
-                    .tag(3)
-                
-                ProfileView()
-                    .tag(4)
-            }
-            .accentColor(.blue)
-            .padding(.top,8)
-            Divider() .background(Color.blue)
-            
-            HStack {
-                ForEach(0..<tabBarItems.count) { index in
-                    Button(action: {
-                        self.selectedTab = index
-                    }) {
-                        VStack {
-                            Image(systemName: self.tabBarItems[index].systemImage)
-                            Text(self.tabBarItems[index].text)
-                                .font(.footnote)
-                        }
-                        //.frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
-                        .foregroundColor(self.selectedTab == index ? .blue : .gray)
-                    }
+        TabView(selection: $selectedTab) {
+            DashboardView()
+                .tabItem {
+                    Image(systemName: "house")
+                    Text("Dashboard")
                 }
-            }
-            .background(Color.white)
+                .tag(0)
+            
+            RequestFoodDetailView()
+                .tabItem {
+                    Image(systemName: "cart")
+                    Text("Request Food")
+                }
+                .tag(1)
+            
+            DonateFoodView()
+                .tabItem {
+                    Image(systemName: "arrow.up.circle.fill")
+                    Text("Donate Food")
+                }
+                .tag(2)
+            
+            DashboardView()  // Assuming this is a unique view for the tab
+                .tabItem {
+                    Image(systemName: "list.bullet")
+                    Text("Donated Food")
+                }
+                .tag(3)
+            
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person")
+                    Text("Profile")
+                }
+                .tag(4)
         }
+        .accentColor(.blue)
     }
 }
 
-struct TabBarItem {
-    let systemImage: String
-    let text: String
-}
+//
+//struct TabBarItem {
+//    let systemImage: String
+//    let text: String
+//}
 
 

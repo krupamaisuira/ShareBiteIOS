@@ -15,10 +15,10 @@ struct ContentView: View {
         NavigationView{
             VStack {
                 if isAuthenticated {
-                                  HeaderView(selectedTab: $selectedTab)
+                                  HeaderView()
                                     Divider().background(Color.blue)
-                                  BottomNavigationView(selectedTab : selectedTab)
-                                    Spacer()
+                                BottomNavigationView(selectedTab : selectedTab)
+                                  
                                 } else {
                                     SignInView()
                                         .opacity(showSplashScreen ? 0 : 1)
