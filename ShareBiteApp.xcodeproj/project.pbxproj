@@ -33,6 +33,7 @@
 		CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD462C2F463B00732195 /* ProfileView.swift */; };
 		CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD482C3485CF00732195 /* ChangePasswordView.swift */; };
 		CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */; };
+		CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		CE33BD462C2F463B00732195 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CE33BD482C3485CF00732195 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
 		CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodDetailView.swift; sourceTree = "<group>"; };
+		CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				CE160F8F2C46AD9300903B9A /* HeaderView.swift */,
 				CE160F932C4D59B900903B9A /* request_food.swift */,
 				CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */,
+				CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				CE33BCA52C19D41800732195 /* SignInView.swift in Sources */,
 				CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */,
 				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
+				CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
 				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
