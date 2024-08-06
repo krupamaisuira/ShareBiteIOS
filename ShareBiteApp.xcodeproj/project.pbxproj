@@ -35,6 +35,9 @@
 		CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */; };
 		CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */; };
 		CE9C19F02C629C5900BCA9C8 /* DonateFoodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19EF2C629C5900BCA9C8 /* DonateFoodView.swift */; };
+		CE9C19F72C62C8BD00BCA9C8 /* ChooseAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */; };
+		CE9C19FA2C62CBBE00BCA9C8 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = CE9C19F92C62CBBE00BCA9C8 /* GooglePlaces */; };
+		CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19FC2C62DBE600BCA9C8 /* Location.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +86,9 @@
 		CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodDetailView.swift; sourceTree = "<group>"; };
 		CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodListView.swift; sourceTree = "<group>"; };
 		CE9C19EF2C629C5900BCA9C8 /* DonateFoodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateFoodView.swift; sourceTree = "<group>"; };
+		CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAddressView.swift; sourceTree = "<group>"; };
+		CE9C19FB2C62D26500BCA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		CE9C19FC2C62DBE600BCA9C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */,
+				CE9C19FA2C62CBBE00BCA9C8 /* GooglePlaces in Frameworks */,
 				CE33BCA12C19D0E600732195 /* FirebaseAuth in Frameworks */,
 				CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */,
 			);
@@ -137,6 +144,7 @@
 		CE33BC342C10AFEE00732195 /* ShareBiteApp */ = {
 			isa = PBXGroup;
 			children = (
+				CE9C19FB2C62D26500BCA9C8 /* Info.plist */,
 				CE33BD322C232C2B00732195 /* Services */,
 				CE33BD312C232C1300732195 /* Models */,
 				CE33BCA22C19D1A300732195 /* GoogleService-Info.plist */,
@@ -157,6 +165,7 @@
 				CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */,
 				CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */,
 				CE9C19EF2C629C5900BCA9C8 /* DonateFoodView.swift */,
+				CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -190,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				CE33BD332C232C5400732195 /* Users.swift */,
+				CE9C19FC2C62DBE600BCA9C8 /* Location.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,6 +241,7 @@
 				CE33BCA02C19D0E600732195 /* FirebaseAuth */,
 				CE33BD372C232D7500732195 /* FirebaseDatabase */,
 				CE33BD432C2F2E9300732195 /* FirebaseFirestore */,
+				CE9C19F92C62CBBE00BCA9C8 /* GooglePlaces */,
 			);
 			productName = ShareBiteApp;
 			productReference = CE33BC322C10AFEE00732195 /* ShareBiteApp.app */;
@@ -306,6 +317,7 @@
 			mainGroup = CE33BC292C10AFEE00732195;
 			packageReferences = (
 				CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				CE9C19F82C62CBBE00BCA9C8 /* XCRemoteSwiftPackageReference "ios-places-sdk" */,
 			);
 			productRefGroup = CE33BC332C10AFEE00732195 /* Products */;
 			projectDirPath = "";
@@ -354,6 +366,7 @@
 				CE33BCA52C19D41800732195 /* SignInView.swift in Sources */,
 				CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */,
 				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
+				CE9C19F72C62C8BD00BCA9C8 /* ChooseAddressView.swift in Sources */,
 				CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
 				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
@@ -362,6 +375,7 @@
 				CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
+				CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */,
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
 				CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
@@ -534,6 +548,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ShareBiteApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareBiteApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide better service.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -562,6 +578,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ShareBiteApp/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareBiteApp/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide better service.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -702,6 +720,14 @@
 				minimumVersion = 10.27.0;
 			};
 		};
+		CE9C19F82C62CBBE00BCA9C8 /* XCRemoteSwiftPackageReference "ios-places-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-places-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -719,6 +745,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		CE9C19F92C62CBBE00BCA9C8 /* GooglePlaces */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE9C19F82C62CBBE00BCA9C8 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
+			productName = GooglePlaces;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
