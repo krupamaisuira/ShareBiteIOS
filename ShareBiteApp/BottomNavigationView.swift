@@ -17,7 +17,7 @@ struct BottomNavigationView: View {
                 DashboardView()
                     .tag(0)
                 
-                ProfileView()
+                request_food()
                     .tag(1)
                 
                 DashboardView()
