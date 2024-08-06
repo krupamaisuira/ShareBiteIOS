@@ -13,10 +13,6 @@ struct DashboardView: View {
                             .multilineTextAlignment(.center)
 //                            .padding(.top, 10)
 
-                        if let username = sessionManager.getCurrentUser()?.username {
-                            Text(username)
-                                .font(.body)
-                        }
 
                         HStack {
                             VStack {
@@ -28,7 +24,7 @@ struct DashboardView: View {
                                 Image(systemName: "heart")
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
-                                    .frame(width: 24, height: 24)
+                                    .frame(width: 24, height: 4)
                                     .padding(7)
                             }
                             .frame(maxWidth: .infinity)
