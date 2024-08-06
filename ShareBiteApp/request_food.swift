@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct request_food: View {
+    
+    
     var body: some View {
+        
         Text("Your request is confirmed!")
             .font(.system(size: 25))
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -57,8 +60,9 @@ struct request_food: View {
                 .font(.system(size: 20))
                 .fontWeight(.bold)
             
-            Text("Collect your requested food items               ")
+            Text("Collect your requested food items")
                 .font(.system(size: 18))
+                .padding(.trailing,50)
         }.padding(.bottom, 8)
         
         Text("Both you and the donor will receive a notification with the same confirmation code to ensure a smooth handover.")
@@ -69,7 +73,24 @@ struct request_food: View {
         Text("If you have any questions or issues, please contact us at\n+1 454 111 1111\nemail@gmail.com")
             .font(.system(size: 18))
             .padding()
+        
+        NavigationLink(destination: DashboardView()) {
+            Text("Home")
+                .frame(maxWidth: 140, maxHeight: 10)
+                .padding()
+                .background(Color.cyan)
+                .foregroundColor(.white)
+                .cornerRadius(10)
+                .padding()
         }
+        
+      
+        
+        
+        
+           
+        
+    }
 }
 
 #Preview {
