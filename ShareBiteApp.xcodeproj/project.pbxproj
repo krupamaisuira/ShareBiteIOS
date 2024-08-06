@@ -32,6 +32,7 @@
 		CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = CE33BD432C2F2E9300732195 /* FirebaseFirestore */; };
 		CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD462C2F463B00732195 /* ProfileView.swift */; };
 		CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE33BD482C3485CF00732195 /* ChangePasswordView.swift */; };
+		CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		CE33BD412C2C66ED00732195 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		CE33BD462C2F463B00732195 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		CE33BD482C3485CF00732195 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 				CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */,
 				CE160F8F2C46AD9300903B9A /* HeaderView.swift */,
 				CE160F932C4D59B900903B9A /* request_food.swift */,
+				CE9C19EB2C62987200BCA9C8 /* RequestFoodDetailView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
+				CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
