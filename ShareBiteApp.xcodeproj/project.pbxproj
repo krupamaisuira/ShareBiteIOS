@@ -38,6 +38,8 @@
 		CE9C19F72C62C8BD00BCA9C8 /* ChooseAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */; };
 		CE9C19FA2C62CBBE00BCA9C8 /* GooglePlaces in Frameworks */ = {isa = PBXBuildFile; productRef = CE9C19F92C62CBBE00BCA9C8 /* GooglePlaces */; };
 		CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19FC2C62DBE600BCA9C8 /* Location.swift */; };
+		CE9C1A012C62E15800BCA9C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */; };
+		CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseAddressView.swift; sourceTree = "<group>"; };
 		CE9C19FB2C62D26500BCA9C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CE9C19FC2C62DBE600BCA9C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +170,7 @@
 				CE9C19ED2C629A0E00BCA9C8 /* RequestFoodListView.swift */,
 				CE9C19EF2C629C5900BCA9C8 /* DonateFoodView.swift */,
 				CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */,
+				CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			children = (
 				CE33BD332C232C5400732195 /* Users.swift */,
 				CE9C19FC2C62DBE600BCA9C8 /* Location.swift */,
+				CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -369,6 +375,7 @@
 				CE9C19F72C62C8BD00BCA9C8 /* ChooseAddressView.swift in Sources */,
 				CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
+				CE9C1A012C62E15800BCA9C8 /* ImagePicker.swift in Sources */,
 				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
@@ -377,6 +384,7 @@
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
 				CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */,
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
+				CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */,
 				CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
 				CE33BD3E2C2C4A2400732195 /* ForgotPasswordView.swift in Sources */,
