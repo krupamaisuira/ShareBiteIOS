@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 struct Utils {
     static func isValidEmail(_ email: String) -> Bool {
@@ -21,6 +21,29 @@ struct Utils {
         let passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d).{6,}$"
         let passwordPredicate = NSPredicate(format: "SELF MATCHES %@", passwordRegex)
         return passwordPredicate.evaluate(with: password)
+    }
+    static func saveImageToDocumentsDirectory(image: UIImage, fileName: String) -> URL? {
+        guard let data = image.jpegData(compressionQuality: 1.0) else { return nil }
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        
+        do {
+            try data.write(to: fileURL)
+            return fileURL
+        } catch {
+            print("Error saving image: \(error)")
+            return nil
+        }
+    }
+    
+    static func loadImageFromDocumentsDirectory(fileName: String) -> UIImage? {
+        let fileManager = FileManager.default
+        let documentsDirectory = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileURL = documentsDirectory.appendingPathComponent(fileName)
+        
+        guard let data = try? Data(contentsOf: fileURL) else { return nil }
+        return UIImage(data: data)
     }
 }
 
