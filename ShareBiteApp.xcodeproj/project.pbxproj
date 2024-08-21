@@ -40,6 +40,13 @@
 		CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C19FC2C62DBE600BCA9C8 /* Location.swift */; };
 		CE9C1A012C62E15800BCA9C8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */; };
 		CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */; };
+		CE9C1A072C630CD100BCA9C8 /* DonateFoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A062C630CD100BCA9C8 /* DonateFoodManager.swift */; };
+		CE9C1A092C630D3C00BCA9C8 /* DonateFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A082C630D3C00BCA9C8 /* DonateFood.swift */; };
+		CE9C1A0B2C74F75A00BCA9C8 /* PhotoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A0A2C74F75A00BCA9C8 /* PhotoManager.swift */; };
+		CE9C1A0D2C74F96700BCA9C8 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = CE9C1A0C2C74F96700BCA9C8 /* FirebaseStorage */; };
+		CE9C1A0F2C7507A100BCA9C8 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A0E2C7507A100BCA9C8 /* LocationManager.swift */; };
+		CE9C1A112C75108000BCA9C8 /* RequestFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A102C75108000BCA9C8 /* RequestFood.swift */; };
+		CE9C1A132C75111300BCA9C8 /* RequestFoodManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE9C1A122C75111300BCA9C8 /* RequestFoodManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +100,12 @@
 		CE9C19FC2C62DBE600BCA9C8 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		CE9C1A062C630CD100BCA9C8 /* DonateFoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateFoodManager.swift; sourceTree = "<group>"; };
+		CE9C1A082C630D3C00BCA9C8 /* DonateFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateFood.swift; sourceTree = "<group>"; };
+		CE9C1A0A2C74F75A00BCA9C8 /* PhotoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoManager.swift; sourceTree = "<group>"; };
+		CE9C1A0E2C7507A100BCA9C8 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		CE9C1A102C75108000BCA9C8 /* RequestFood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFood.swift; sourceTree = "<group>"; };
+		CE9C1A122C75111300BCA9C8 /* RequestFoodManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestFoodManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +116,7 @@
 				CE33BD382C232D7500732195 /* FirebaseDatabase in Frameworks */,
 				CE9C19FA2C62CBBE00BCA9C8 /* GooglePlaces in Frameworks */,
 				CE33BCA12C19D0E600732195 /* FirebaseAuth in Frameworks */,
+				CE9C1A0D2C74F96700BCA9C8 /* FirebaseStorage in Frameworks */,
 				CE33BD442C2F2E9300732195 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,6 +220,8 @@
 				CE33BD332C232C5400732195 /* Users.swift */,
 				CE9C19FC2C62DBE600BCA9C8 /* Location.swift */,
 				CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */,
+				CE9C1A082C630D3C00BCA9C8 /* DonateFood.swift */,
+				CE9C1A102C75108000BCA9C8 /* RequestFood.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +232,10 @@
 				CE33BD352C232CF800732195 /* UserManager.swift */,
 				CE33BD3F2C2C57DF00732195 /* Utils.swift */,
 				CE33BD412C2C66ED00732195 /* SessionManager.swift */,
+				CE9C1A062C630CD100BCA9C8 /* DonateFoodManager.swift */,
+				CE9C1A0A2C74F75A00BCA9C8 /* PhotoManager.swift */,
+				CE9C1A0E2C7507A100BCA9C8 /* LocationManager.swift */,
+				CE9C1A122C75111300BCA9C8 /* RequestFoodManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -248,6 +268,7 @@
 				CE33BD372C232D7500732195 /* FirebaseDatabase */,
 				CE33BD432C2F2E9300732195 /* FirebaseFirestore */,
 				CE9C19F92C62CBBE00BCA9C8 /* GooglePlaces */,
+				CE9C1A0C2C74F96700BCA9C8 /* FirebaseStorage */,
 			);
 			productName = ShareBiteApp;
 			productReference = CE33BC322C10AFEE00732195 /* ShareBiteApp.app */;
@@ -368,22 +389,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE9C1A072C630CD100BCA9C8 /* DonateFoodManager.swift in Sources */,
 				CE160F942C4D59B900903B9A /* request_food.swift in Sources */,
 				CE33BCA52C19D41800732195 /* SignInView.swift in Sources */,
 				CE33BCAD2C19E50200732195 /* DashboardView.swift in Sources */,
 				CE33BC382C10AFEE00732195 /* ContentView.swift in Sources */,
+				CE9C1A112C75108000BCA9C8 /* RequestFood.swift in Sources */,
 				CE9C19F72C62C8BD00BCA9C8 /* ChooseAddressView.swift in Sources */,
 				CE9C19EE2C629A0E00BCA9C8 /* RequestFoodListView.swift in Sources */,
 				CE33BC362C10AFEE00732195 /* ShareBiteAppApp.swift in Sources */,
 				CE9C1A012C62E15800BCA9C8 /* ImagePicker.swift in Sources */,
 				CE33BD472C2F463B00732195 /* ProfileView.swift in Sources */,
+				CE9C1A0B2C74F75A00BCA9C8 /* PhotoManager.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
+				CE9C1A132C75111300BCA9C8 /* RequestFoodManager.swift in Sources */,
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
 				CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
 				CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */,
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
+				CE9C1A092C630D3C00BCA9C8 /* DonateFood.swift in Sources */,
 				CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */,
 				CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,
@@ -391,6 +417,7 @@
 				CE33BD342C232C5400732195 /* Users.swift in Sources */,
 				CE33BD422C2C66ED00732195 /* SessionManager.swift in Sources */,
 				CE9C19F02C629C5900BCA9C8 /* DonateFoodView.swift in Sources */,
+				CE9C1A0F2C7507A100BCA9C8 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +785,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE9C19F82C62CBBE00BCA9C8 /* XCRemoteSwiftPackageReference "ios-places-sdk" */;
 			productName = GooglePlaces;
+		};
+		CE9C1A0C2C74F96700BCA9C8 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE33BC9F2C19D0E600732195 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
