@@ -15,6 +15,7 @@ struct Users :Identifiable,Codable{
     var notification = true
     var createdon = Date()
     
+    
 }
 struct SessionUsers :Identifiable,Codable{
     var id : String

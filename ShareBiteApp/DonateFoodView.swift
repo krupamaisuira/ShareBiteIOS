@@ -3,6 +3,8 @@ import SwiftUI
 struct DonateFoodView: View {
     @State private var foodTitle: String = ""
     @State private var description: String = ""
+    @State private var bestBefore : String = ""
+    @State private var price : String = ""
     @State private var showAddressPopup: Bool = false
     @State private var address: String = "Add Address"
     @State private var location: Location? = nil
@@ -13,7 +15,11 @@ struct DonateFoodView: View {
     
     @State private var donationId: String = "donationId123"
     @State private var navigateToDashboard: Bool = false
-    
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
+    @State private var selectedDate = Date()
+    @State private var showDatePicker = false
+    @ObservedObject private var sessionManager = SessionManager.shared
     var body: some View {
         VStack {
             ScrollView {
@@ -124,18 +130,42 @@ struct DonateFoodView: View {
                         .cornerRadius(8)
                         .padding(.horizontal)
                     
-                    TextField("Best before", text: $foodTitle)
-                        .font(.system(size: 16))
-                        .padding(.vertical, 8)
-                        .padding(.leading, 8)  // Padding for hint text
-                        .background(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .padding(.horizontal)
+                    Button(action: {
+                                            showDatePicker.toggle()
+                                        }) {
+                                            HStack {
+                                                TextField("Best before", text: $bestBefore)
+                                                    .font(.system(size: 16))
+                                                    .padding(.vertical, 8)
+                                                    .padding(.leading, 8)
+                                                    .background(Color.white)
+                                                    .overlay(
+                                                        RoundedRectangle(cornerRadius: 8)
+                                                            .stroke(Color.gray, lineWidth: 1)
+                                                    )
+                                                    .disabled(true)  // Prevent direct editing
+                                                    .padding(.horizontal)
+                                            }
+                                        }
+                                        .sheet(isPresented: $showDatePicker) {
+                                            VStack {
+                                                DatePicker("Select Date and Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                                                    .datePickerStyle(WheelDatePickerStyle())
+                                                    .labelsHidden()
+                                                    .padding()
+                                                
+                                                Button("Done") {
+                                                    let formatter = DateFormatter()
+                                                    formatter.dateStyle = .medium
+                                                    formatter.timeStyle = .short
+                                                    self.bestBefore = formatter.string(from: selectedDate)
+                                                    self.showDatePicker = false
+                                                }
+                                                .padding()
+                                            }
+                                        }
                     
-                    TextField("Price", text: $foodTitle)
+                    TextField("Price", text: $price)
                         .font(.system(size: 16))
                         .padding(.vertical, 8)
                         .padding(.leading, 8)  // Padding for hint text
@@ -155,7 +185,7 @@ struct DonateFoodView: View {
                     HStack {
                         Spacer()
                         Button(action: {
-                            savePhotos()
+                            validateAndSave()
                         }) {
                             Text("Donate")
                                 .frame(maxWidth: .infinity)
@@ -198,8 +228,15 @@ struct DonateFoodView: View {
             .onAppear {
                 location = nil
             }
-            .navigationBarHidden(true) // Hide the navigation bar
-            .navigationBarBackButtonHidden(true) // Hide the back button
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
+            .alert(isPresented: $showAlert) {
+                           Alert(
+                               title: Text("Validation Error"),
+                               message: Text(alertMessage),
+                               dismissButton: .default(Text("OK"))
+                           )
+                       }
         }
     }
     
@@ -212,18 +249,79 @@ struct DonateFoodView: View {
             images.remove(at: index)
         }
     }
-    
-    private func savePhotos() {
-        for (index, image) in images.enumerated() {
-            let fileName = "photo_\(index).jpg"
-            if let fileURL = Utils.saveImageToDocumentsDirectory(image: image, fileName: fileName) {
-                let photoModel = Photos(donationId: donationId, photoPath: fileURL.path)
-                photoModels.append(photoModel)
+    private func showAlert(message: String) {
+            alertMessage = message
+            showAlert = true
+    }
+    private func validateAndSave() {
+            if images.isEmpty {
+                showAlert(message: "Please add at least one photo.")
+            } else if location == nil {
+                showAlert(message: "Please select an address.")
+            } else if foodTitle.isEmpty {
+                showAlert(message: "Please enter a title for the food.")
+            } else if description.isEmpty {
+                showAlert(message: "Please enter a description for the food.")
+            } else if bestBefore.isEmpty {
+                showAlert(message: "Please enter the best before.")
+            } else if Double(price) == nil {
+                showAlert(message: "Please enter a valid price.")
+            } else {
+                saveDonateFood()
+            }
+    }
+    private func saveDonateFood() {
+       
+       
+        let donatedBy = sessionManager.getCurrentUser()?.id ?? "Anonymous"
+        let priceDouble = Double(price) ?? 0.0
+        // Create a DonateFood object
+        let food = DonateFood(
+            donatedBy: donatedBy,
+            title: foodTitle,
+            description: description,
+            bestBefore: bestBefore,
+            price: priceDouble,
+            location: location!,
+            imageUris: [],
+            status: FoodStatus.available.rawValue,
+            saveImage: images
+        )
+        
+        // Create a service instance
+        let donateFoodService = DonateFoodService()
+        
+        // Use the service to donate food
+        donateFoodService.donateFood(food) { result in
+            switch result {
+            case .success:
+                // Navigate to Dashboard on success
+                DispatchQueue.main.async {
+                    self.navigateToDashboard = true
+                }
+            case .failure(let error):
+                // Convert the error to a string and show an alert
+                let errorMessage = error.localizedDescription
+                DispatchQueue.main.async {
+                    self.showAlert(message: errorMessage)
+                }
             }
         }
-        print("Photos saved successfully.\(photoModels)")
-        navigateToDashboard = true
+
     }
+
+
+//    private func savePhotos() {
+//        for (index, image) in images.enumerated() {
+//            let fileName = "photo_\(index).jpg"
+//            if let fileURL = Utils.saveImageToDocumentsDirectory(image: image, fileName: fileName) {
+//                let photoModel = Photos(donationId: donationId, imagePath: fileURL.path, order : index)
+//                photoModels.append(photoModel)
+//            }
+//        }
+//        print("Photos saved successfully.\(photoModels)")
+//        navigateToDashboard = true
+//    }
 }
 
 struct DonateFoodView_Preview: PreviewProvider {

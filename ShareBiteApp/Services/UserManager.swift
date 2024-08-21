@@ -9,6 +9,10 @@ import Foundation
 import FirebaseDatabase
 import Firebase
 
+protocol UserCallback {
+    var onSuccess: (Users) -> Void { get }
+    var onFailure: (String) -> Void { get }
+}
 class UserManager : ObservableObject{
     
     private let database = Database.database().reference();
@@ -97,5 +101,25 @@ class UserManager : ObservableObject{
         }
     }
 
-    
+    func getUserByID(uid: String, onSuccess: @escaping (Users) -> Void, onFailure: @escaping (String) -> Void) {
+        let userReference =  Database.database().reference().child(_collection).child(uid)
+            
+        userReference.observeSingleEvent(of: .value) { snapshot in
+            guard let value = snapshot.value as? [String: Any] else {
+                onFailure("Error: Could not parse user data.")
+                return
+            }
+            
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                let user = try JSONDecoder().decode(Users.self, from: jsonData)
+                onSuccess(user)
+            } catch {
+                onFailure("Error: \(error.localizedDescription)")
+            }
+        } withCancel: { error in
+            onFailure(error.localizedDescription)
+        }
+    }
+
 }

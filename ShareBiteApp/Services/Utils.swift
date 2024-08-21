@@ -45,5 +45,11 @@ struct Utils {
         guard let data = try? Data(contentsOf: fileURL) else { return nil }
         return UIImage(data: data)
     }
+    static func getCurrentDatetime() -> String {
+           let dateFormatter = DateFormatter()
+           dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           dateFormatter.locale = Locale.current
+           return dateFormatter.string(from: Date())
+       }
 }
 
