@@ -156,8 +156,9 @@ struct DonateFoodView: View {
                                                 
                                                 Button("Done") {
                                                     let formatter = DateFormatter()
-                                                    formatter.dateStyle = .medium
-                                                    formatter.timeStyle = .short
+                                                    formatter.dateFormat = "MMM d, yyyy h:mm a"
+//                                                    formatter.dateStyle = .medium
+//                                                    formatter.timeStyle = .short
                                                     self.bestBefore = formatter.string(from: selectedDate)
                                                     self.showDatePicker = false
                                                 }
@@ -264,7 +265,7 @@ struct DonateFoodView: View {
                 showAlert(message: "Please enter a description for the food.")
             } else if bestBefore.isEmpty {
                 showAlert(message: "Please enter the best before.")
-            } else if Double(price) == nil {
+            } else if !price.isEmpty && Double(price) == nil {
                 showAlert(message: "Please enter a valid price.")
             } else {
                 saveDonateFood()
