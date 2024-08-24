@@ -28,7 +28,7 @@ struct BottomNavigationView: View {
                 }
                 .tag(2)
             
-            DashboardView()  // Assuming this is a unique view for the tab
+            DonatedFoodListView()  // Assuming this is a unique view for the tab
                 .tabItem {
                     Image(systemName: "list.bullet")
                     Text("Donated Food")

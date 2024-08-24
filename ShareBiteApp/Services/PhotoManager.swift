@@ -10,15 +10,7 @@ import FirebaseDatabase
 import FirebaseStorage
 import UIKit
 
-protocol OperationCallback {
-    func onSuccess()
-    func onFailure(_ error: String)
-}
 
-protocol ListOperationCallback {
-    func onSuccess(_ imageUrls: [URL])
-    func onFailure(_ error: String)
-}
 
 class PhotoService {
     private var reference: DatabaseReference
@@ -52,44 +44,6 @@ class PhotoService {
             }
         }
     }
-
-
-
-//    func getAllPhotosByDonationId(_ uid: String, callback: ListOperationCallback?) {
-//        reference.child(collectionName)
-//            .queryOrdered(byChild: "donationId")
-//            .queryEqual(toValue: uid)
-//            .observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
-//                
-//                // Check if the snapshot contains any data
-//                guard snapshot.exists() else {
-//                    callback?.onFailure("Photos not found")
-//                    return
-//                }
-//                
-//                var photosList: [Photos] = []
-//                
-//                for child in snapshot.children {
-//                    if let childSnapshot = child as? DataSnapshot,
-//                       let photo = Photos(snapshot: childSnapshot) {
-//                        photosList.append(photo)
-//                    }
-//                }
-//                
-//                // Sort photos by order
-//                photosList.sort { $0.order < $1.order }
-//                
-//                // Map photos to URLs
-//                let imageUrls = photosList.compactMap { URL(string: $0.imagePath ?? "") }
-//                
-//                // Call the success callback with the URLs
-//                callback?.onSuccess(imageUrls)
-//                
-//            } withCancel: { error in
-//                // Handle cancellation errors
-//                callback?.onFailure(error.localizedDescription)
-//            }
-//    }
 
     func uploadImages(donationId: String, imageUris: [UIImage], completion: @escaping (Result<Void, Error>) -> Void) {
         let dispatchGroup = DispatchGroup()
@@ -199,36 +153,47 @@ class PhotoService {
             }
         }
     }
-
-    func updatePhotoOrder(donationId: String, callback: OperationCallback?) {
-        let photosRef = Database.database().reference().child(collectionName)
-        photosRef.queryOrdered(byChild: "donationId").queryEqual(toValue: donationId).observeSingleEvent(of: .value) { snapshot in
-            if !snapshot.exists() {
-                callback?.onFailure("No photos found for this donationId.")
+    func getAllPhotosByDonationId(donationId: String, completion: @escaping (Result<[URL], Error>) -> Void) {
+        let query = reference.child(collectionName).queryOrdered(byChild: "donationId").queryEqual(toValue: donationId)
+        
+        query.observeSingleEvent(of: .value) { snapshot in
+            guard snapshot.exists() else {
+                print("PhotoService: snapshot does not exist")
+                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Photos not found"])))
                 return
             }
-
-            var order = 1
-            var failureOccurred = false
-
-            for child in snapshot.children.allObjects as! [DataSnapshot] {
-                child.ref.child("order").setValue(order) { error, _ in
-                    if let error = error {
-                        if !failureOccurred {
-                            failureOccurred = true
-                            callback?.onFailure("Error updating photo order: \(error.localizedDescription)")
-                        }
-                    }
+            
+            var photosList: [Photos] = []
+            
+            for childSnapshot in snapshot.children {
+                if let childSnapshot = childSnapshot as? DataSnapshot,
+                   let photoDict = childSnapshot.value as? [String: Any],
+                   let donationId = photoDict["donationId"] as? String,
+                   let order = photoDict["order"] as? Int {
+                    
+                    let imagePath = photoDict["imagePath"] as? String
+                    let photo = Photos(donationId: donationId, imagePath: imagePath ?? "", order: order)
+                    photosList.append(photo)
+                } else {
+                    print("PhotoService: photo is null")
                 }
-                order += 1
             }
-
-            if !failureOccurred {
-                callback?.onSuccess()
+            
+            photosList.sort { $0.order < $1.order }
+            
+            let imageUrls: [URL] = photosList.compactMap {
+                if let imagePath = $0.imagePath {
+                    return URL(string: imagePath)
+                }
+                return nil
             }
+            
+            completion(.success(imageUrls))
         } withCancel: { error in
-            callback?.onFailure("Database operation cancelled: \(error.localizedDescription)")
+            print("PhotoService: Error - \(error.localizedDescription)")
+            completion(.failure(error))
         }
     }
+
 }
 

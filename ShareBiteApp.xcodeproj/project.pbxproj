@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012206472C78FA6B0083BCA1 /* DonatedFoodListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012206462C78FA6B0083BCA1 /* DonatedFoodListView.swift */; };
+		012206492C78FE020083BCA1 /* DonatedFoodCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012206482C78FE020083BCA1 /* DonatedFoodCardView.swift */; };
+		0122064B2C7A16F10083BCA1 /* FoodStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122064A2C7A16F10083BCA1 /* FoodStatus.swift */; };
 		CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */; };
 		CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8F2C46AD9300903B9A /* HeaderView.swift */; };
 		CE160F942C4D59B900903B9A /* request_food.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F932C4D59B900903B9A /* request_food.swift */; };
@@ -67,6 +70,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		012206462C78FA6B0083BCA1 /* DonatedFoodListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatedFoodListView.swift; sourceTree = "<group>"; };
+		012206482C78FE020083BCA1 /* DonatedFoodCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatedFoodCardView.swift; sourceTree = "<group>"; };
+		0122064A2C7A16F10083BCA1 /* FoodStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStatus.swift; sourceTree = "<group>"; };
 		CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		CE160F8F2C46AD9300903B9A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE160F932C4D59B900903B9A /* request_food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = request_food.swift; sourceTree = "<group>"; };
@@ -185,6 +191,8 @@
 				CE9C19EF2C629C5900BCA9C8 /* DonateFoodView.swift */,
 				CE9C19F62C62C8BD00BCA9C8 /* ChooseAddressView.swift */,
 				CE9C1A002C62E15800BCA9C8 /* ImagePicker.swift */,
+				012206462C78FA6B0083BCA1 /* DonatedFoodListView.swift */,
+				012206482C78FE020083BCA1 /* DonatedFoodCardView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -236,6 +244,7 @@
 				CE9C1A0A2C74F75A00BCA9C8 /* PhotoManager.swift */,
 				CE9C1A0E2C7507A100BCA9C8 /* LocationManager.swift */,
 				CE9C1A122C75111300BCA9C8 /* RequestFoodManager.swift */,
+				0122064A2C7A16F10083BCA1 /* FoodStatus.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -389,6 +398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				012206472C78FA6B0083BCA1 /* DonatedFoodListView.swift in Sources */,
 				CE9C1A072C630CD100BCA9C8 /* DonateFoodManager.swift in Sources */,
 				CE160F942C4D59B900903B9A /* request_food.swift in Sources */,
 				CE33BCA52C19D41800732195 /* SignInView.swift in Sources */,
@@ -405,11 +415,13 @@
 				CE9C1A132C75111300BCA9C8 /* RequestFoodManager.swift in Sources */,
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
 				CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */,
+				012206492C78FE020083BCA1 /* DonatedFoodCardView.swift in Sources */,
 				CE33BD402C2C57DF00732195 /* Utils.swift in Sources */,
 				CE33BCA92C19D51200732195 /* SplashScreenView.swift in Sources */,
 				CE9C19FD2C62DBE600BCA9C8 /* Location.swift in Sources */,
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
 				CE9C1A092C630D3C00BCA9C8 /* DonateFood.swift in Sources */,
+				0122064B2C7A16F10083BCA1 /* FoodStatus.swift in Sources */,
 				CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */,
 				CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */,
 				CE33BD362C232CF800732195 /* UserManager.swift in Sources */,

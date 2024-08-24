@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 struct Utils {
     static func isValidEmail(_ email: String) -> Bool {
@@ -51,5 +52,21 @@ struct Utils {
            dateFormatter.locale = Locale.current
            return dateFormatter.string(from: Date())
        }
+    static func setStatusColors(for status: FoodStatus) -> (textColor: Color, backgroundColor: Color) {
+        switch status {
+        case .available:
+            return (textColor: .white, backgroundColor: .blue)
+        case .expired:
+            return (textColor: .red, backgroundColor: Color.red.opacity(0.3))
+        case .donated:
+            return (textColor: .green, backgroundColor: Color.green.opacity(0.3))
+        case .requested:
+            return (textColor: .orange, backgroundColor: Color.yellow.opacity(0.3))
+        case .cancelled:
+            return (textColor: .gray, backgroundColor: Color.gray.opacity(0.3))
+        default:
+            return (textColor: .white, backgroundColor: .blue)
+        }
+    }
 }
 

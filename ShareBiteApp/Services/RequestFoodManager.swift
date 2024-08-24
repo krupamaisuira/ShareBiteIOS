@@ -25,22 +25,22 @@ class RequestFoodService {
         self.userService = UserManager()
     }
     
-    func requestFood(model: RequestFood, callback:  OperationCallback) {
-        let newItemKey = reference.child(Self.collectionName).childByAutoId().key
-        model.requestId = newItemKey
-        guard let newItemKey = newItemKey else {
-            callback.onFailure("Failed to generate new item key.")
-            return
-        }
-        
-        reference.child(Self.collectionName).child(newItemKey).setValue(model.toMapUpdate()) { error, _ in
-            if let error = error {
-                callback.onFailure(error.localizedDescription)
-            } else {
-                callback.onSuccess()
-            }
-        }
-    }
+//    func requestFood(model: RequestFood, callback:  OperationCallback) {
+//        let newItemKey = reference.child(Self.collectionName).childByAutoId().key
+//        model.requestId = newItemKey
+//        guard let newItemKey = newItemKey else {
+//            callback.onFailure("Failed to generate new item key.")
+//            return
+//        }
+//        
+//        reference.child(Self.collectionName).child(newItemKey).setValue(model.toMapUpdate()) { error, _ in
+//            if let error = error {
+//                callback.onFailure(error.localizedDescription)
+//            } else {
+//                callback.onSuccess()
+//            }
+//        }
+//    }
     
     func isRequestFoodExist(model: RequestFood, callback: any OperationCallbackList) {
         reference.child(Self.collectionName)
@@ -85,21 +85,21 @@ class RequestFoodService {
 
 
         
-    
-    func requestFoodCancel(uid: String, cancelby: String, callback: OperationCallback) {
-        let updates = [
-            "cancelon": Utils.getCurrentDatetime(),
-            "cancelby": cancelby
-        ]
-        
-        reference.child(Self.collectionName).child(uid).updateChildValues(updates) { error, _ in
-            if let error = error {
-                callback.onFailure(error.localizedDescription)
-            } else {
-                callback.onSuccess()
-            }
-        }
-    }
+//    
+//    func requestFoodCancel(uid: String, cancelby: String, callback: OperationCallback) {
+//        let updates = [
+//            "cancelon": Utils.getCurrentDatetime(),
+//            "cancelby": cancelby
+//        ]
+//        
+//        reference.child(Self.collectionName).child(uid).updateChildValues(updates) { error, _ in
+//            if let error = error {
+//                callback.onFailure(error.localizedDescription)
+//            } else {
+//                callback.onSuccess()
+//            }
+//        }
+//    }
     
     func fetchDonationRequests(userId: String, callback: @escaping ([String]) -> Void) {
         reference.child(Self.collectionName)

@@ -156,7 +156,8 @@ struct DonateFoodView: View {
                                                 
                                                 Button("Done") {
                                                     let formatter = DateFormatter()
-                                                    formatter.dateFormat = "MMM d, yyyy h:mm a"
+                                                    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+                                                  //  formatter.dateFormat = "MMM d, yyyy h:mm a"
 //                                                    formatter.dateStyle = .medium
 //                                                    formatter.timeStyle = .short
                                                     self.bestBefore = formatter.string(from: selectedDate)
