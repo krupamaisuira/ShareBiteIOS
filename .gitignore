@@ -1,6 +1,12 @@
 # Xcode
 *.xcuserstate
 *.xcworkspace/xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+*.xcscheme
 
 # macOS
-.DS_StoreShareBiteApp.xcodeproj/xcuserdata/
+.DS_Store
+
+# Add any specific file you want to keep
+!ShareBiteApp.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
