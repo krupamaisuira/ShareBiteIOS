@@ -33,49 +33,35 @@ class LocationService {
         }
     }
 
-
-
-
-    func deleteLocationByDonationID(_ donationId: String, callback: OperationCallback?) {
+    func deleteLocationByDonationID(donationId: String, completion: @escaping (Result<Void, Error>) -> Void) {
+       
         reference.child(collectionName)
             .queryOrdered(byChild: "donationId")
             .queryEqual(toValue: donationId)
             .observeSingleEvent(of: .value) { snapshot in
                 if snapshot.exists() {
-                    if let firstMatch = snapshot.children.allObjects.first as? DataSnapshot {
-                        let locationId = firstMatch.key
+                    if let firstMatch = snapshot.children.allObjects.first as? DataSnapshot,
+                       let locationId = firstMatch.key as String? {
                         self.reference.child(self.collectionName).child(locationId).child("locationdeleted").setValue(true) { error, _ in
                             if let error = error {
-                                callback?.onFailure(error.localizedDescription)
+                                completion(.failure(error))
                             } else {
-                                callback?.onSuccess()
+                                completion(.success(()))
                             }
                         }
+                    } else {
+                        completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to retrieve location ID."])))
                     }
                 } else {
-                    callback?.onFailure("No location found with the provided donation ID.")
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No location found with the provided donation ID."])))
                 }
             } withCancel: { error in
-                callback?.onFailure(error.localizedDescription)
+                completion(.failure(error))
             }
     }
 
-  
 
-    func updateLocation(_ model: Location, callback: OperationCallback?) {
-        // Make a mutable copy of the model
-//        var mutableModel = model
-//        mutableModel.updatedOn = Utils.getCurrentDatetime()
-        
-        // Proceed with updating the Firebase database
-        reference.child(collectionName).child(model.locationId ?? "").updateChildValues(model.toMapUpdate()) { error, _ in
-            if let error = error {
-                callback?.onFailure(error.localizedDescription)
-            } else {
-                callback?.onSuccess()
-            }
-        }
-    }
+
 
 }
 
