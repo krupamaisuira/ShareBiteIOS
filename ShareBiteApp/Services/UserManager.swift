@@ -9,10 +9,7 @@ import Foundation
 import FirebaseDatabase
 import Firebase
 
-protocol UserCallback {
-    var onSuccess: (Users) -> Void { get }
-    var onFailure: (String) -> Void { get }
-}
+
 class UserManager : ObservableObject{
     
     private let database = Database.database().reference();
@@ -101,25 +98,41 @@ class UserManager : ObservableObject{
         }
     }
 
-    func getUserByID(uid: String, onSuccess: @escaping (Users) -> Void, onFailure: @escaping (String) -> Void) {
-        let userReference =  Database.database().reference().child(_collection).child(uid)
-            
+    func getUserByID(uid: String, completion: @escaping (Users?) -> Void) {
+        let userReference = database.child(_collection).child(uid)
+
         userReference.observeSingleEvent(of: .value) { snapshot in
-            guard let value = snapshot.value as? [String: Any] else {
-                onFailure("Error: Could not parse user data.")
-                return
-            }
-            
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                let user = try JSONDecoder().decode(Users.self, from: jsonData)
-                onSuccess(user)
-            } catch {
-                onFailure("Error: \(error.localizedDescription)")
+            if snapshot.exists() {
+                print("Snapshot exists: \(snapshot)")
+
+                if let userData = snapshot.value as? [String: Any] {
+                    print("Data parsing started")
+
+
+                    let username = userData["username"] as? String ?? ""
+                    let email = userData["email"] as? String ?? ""
+                    let mobilenumber = userData["mobilenumber"] as? String ?? ""
+                    let profiledeleted = userData["profiledeleted"] as? Bool ?? false
+                    let notification = userData["notification"] as? Bool ?? true
+                    let createdon = userData["createdon"] as? Double ?? Date().timeIntervalSince1970
+
+                    // Initialize Users model
+                    let user = Users(id: uid, username: username, email: email, mobilenumber: mobilenumber, profiledeleted: profiledeleted, notification: notification, createdon: Date(timeIntervalSince1970: createdon))
+
+                    completion(user)
+                } else {
+                    print("Failed to parse user data for id: \(uid)")
+                    completion(nil)
+                }
+            } else {
+                print("No user found for id: \(uid)")
+                completion(nil)
             }
         } withCancel: { error in
-            onFailure(error.localizedDescription)
+            print("Database error: \(error.localizedDescription)")
+            completion(nil)
         }
     }
 
+        
 }

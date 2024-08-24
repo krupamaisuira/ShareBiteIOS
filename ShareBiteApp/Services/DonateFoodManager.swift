@@ -89,17 +89,26 @@ class DonateFoodService {
             print("Snapshot value: \(snapshot.value ?? "No data")") // Debug line
             
             for childSnapshot in snapshot.children {
-                if let childSnapshot = childSnapshot as? DataSnapshot,
-                   let food = DonateFood(snapshot: childSnapshot) {
-                    print("Fetched food: \(food)") // Debug line
-                    
-                    print("Food deleted: \(food.foodDeleted), Donated by: \(food.donatedBy), Expected userId: \(userId)")
-                    if !food.foodDeleted, food.donatedBy == userId {
-                        food.donationId = childSnapshot.key
-                        tempList.append(food)
+                if let childSnapshot = childSnapshot as? DataSnapshot {
+                    // Convert childSnapshot to dictionary
+                    if let dict = childSnapshot.value as? [String: Any] {
+                        // Initialize DonateFood using the dictionary
+                        if let food = DonateFood(from: dict) {
+                            print("Fetched food: \(food)") // Debug line
+                            
+                            print("Food deleted: \(food.foodDeleted), Donated by: \(food.donatedBy), Expected userId: \(userId)")
+                            if !food.foodDeleted, food.donatedBy == userId {
+                                food.donationId = childSnapshot.key
+                                tempList.append(food)
+                            }
+                        } else {
+                            print("Failed to initialize DonateFood from dictionary: \(dict)")
+                        }
+                    } else {
+                        print("Failed to cast childSnapshot value to dictionary: \(childSnapshot.value ?? "No value")")
                     }
                 } else {
-                    print("Failed to initialize DonateFood from snapshot: \(childSnapshot)")
+                    print("Failed to cast childSnapshot to DataSnapshot")
                 }
             }
 
@@ -164,7 +173,77 @@ class DonateFoodService {
             }
         }
     
-    
-    
-    
+    func getDonationDetail(uid: String, completion: @escaping (Result<DonateFood, Error>) -> Void) {
+        reference.child(collectionName).child(uid).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            if snapshot.exists() {
+                guard let dict = snapshot.value as? [String: Any] else {
+                    print("DonateFood not found for donationId: \(uid)")
+                    completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "DonateFood not found."])))
+                    return
+                }
+
+                do {
+                    let jsonData = try JSONSerialization.data(withJSONObject: dict, options: [])
+                        print("JSON Data: \(String(data: jsonData, encoding: .utf8) ?? "Invalid JSON")")
+                     let food = try JSONDecoder().decode(DonateFood.self, from: jsonData)
+                        food.donationId = uid
+                        print("Decoded Food: \(food)")
+                    
+                    // Safely unwrap `food.donationId`
+                    guard let donationId = food.donationId else {
+                        print("Donation ID is nil")
+                        completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Donation ID is nil."])))
+                        return
+                    }
+                    
+                    // Fetch photos asynchronously
+                    self.photoService.getAllPhotosByDonationId(donationId: donationId) { result in
+                        switch result {
+                        case .success(let imageUris):
+                            print("Photo data: \(imageUris.count)")
+                            food.uploadedImageUris = imageUris
+                            
+                            // Fetch location asynchronously
+                            self.locationService.getLocationByDonationId(uid: donationId) { result in
+                                switch result {
+                                case .success(let location):
+                                    print("Location data: \(location.address)")
+                                    food.location = location
+                                    
+                                    // Check if RequestFood exists
+                                    self.requestFoodService.isRequestFoodExist(requestforId: donationId) { result in
+                                        switch result {
+                                        case .success(let existingRequest):
+                                            food.requestedBy = existingRequest
+                                            completion(.success(food))
+                                        case .failure(let error):
+                                            print("Error checking request food existence: \(error.localizedDescription)")
+                                            completion(.success(food))
+                                        }
+                                    }
+                                case .failure(let error):
+                                    print("Error fetching location: \(error.localizedDescription)")
+                                    completion(.failure(error))
+                                }
+                            }
+                        case .failure(let error):
+                            print("Error fetching photos: \(error.localizedDescription)")
+                            completion(.failure(error))
+                        }
+                    }
+                    
+                } catch {
+                    print("Error decoding DonateFood: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            } else {
+                print("Snapshot does not exist for donationId: \(uid)")
+                completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Snapshot does not exist."])))
+            }
+        } withCancel: { error in
+            print("DatabaseError: \(error.localizedDescription)")
+            completion(.failure(error))
+        }
+    }
+
 }

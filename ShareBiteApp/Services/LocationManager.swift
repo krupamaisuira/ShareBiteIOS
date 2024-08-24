@@ -61,7 +61,28 @@ class LocationService {
     }
 
 
-
+    func getLocationByDonationId(uid: String, completion: @escaping (Result<Location, Error>) -> Void) {
+      
+        reference.child(collectionName).queryOrdered(byChild: "donationId").queryEqual(toValue: uid).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                for childSnapshot in snapshot.children {
+                    guard let childSnapshot = childSnapshot as? DataSnapshot,
+                          let location = try? childSnapshot.data(as: Location.self) else {
+                        print("Error decoding location")
+                        continue
+                    }
+                    completion(.success(location))
+                    return
+                }
+            } else {
+                print("Snapshot does not exist")
+            }
+            
+            completion(.failure(NSError(domain: "", code: 404, userInfo: [NSLocalizedDescriptionKey: "Location not found"])))
+        } withCancel: { error in
+            completion(.failure(error))
+        }
+    }
 
 }
 

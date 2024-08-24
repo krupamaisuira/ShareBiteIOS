@@ -9,7 +9,7 @@ import Foundation
 import FirebaseDatabase
 import FirebaseStorage
 
-class RequestFood {
+class RequestFood : Decodable {
     var requestId: String?
     var requestforId: String?
     var requestedBy: String?
