@@ -17,7 +17,7 @@ protocol OperationCallbackList {
 class RequestFoodService {
     
     private let reference: DatabaseReference
-    private static let collectionName = "foodrequest"
+    private  let collectionName = "foodrequest"
     private let userService: UserManager
 
     init() {
@@ -42,47 +42,55 @@ class RequestFoodService {
 //        }
 //    }
     
-    func isRequestFoodExist(model: RequestFood, callback: any OperationCallbackList) {
-        reference.child(Self.collectionName)
+    func isRequestFoodExist(requestforId: String, completion: @escaping (Result<RequestFood, Error>) -> Void) {
+        reference.child(collectionName)
             .queryOrdered(byChild: "requestforId")
-            .queryEqual(toValue: model.requestforId)
-            .observeSingleEvent(of: .value) { (snapshot : DataSnapshot) in
-                var dataFound = false
+            .queryEqual(toValue: requestforId)
+            .observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
                 var existingRequest: RequestFood?
-
+                var requestsFound = false
+                
                 for child in snapshot.children {
                     guard let childSnapshot = child as? DataSnapshot,
                           let request = RequestFood(snapshot: childSnapshot) else {
                         continue
                     }
-
+                    
                     existingRequest = request
-                    dataFound = true
-
-                    // Adjust to handle the closure-based UserCallback
-                    self.userService.getUserByID(uid: request.requestedBy ?? "<#default value#>",
-                                                 onSuccess: { user in
-                                                     existingRequest?.requestedUserDetail = user
-                                                     if dataFound, let existingRequest = existingRequest {
-                                                         callback.onSuccess([existingRequest])
-                                                     }
-                                                 },
-                                                 onFailure: { error in
-                                                     callback.onFailure(error)
-                                                 })
-
-                    // Break out of the loop once we have found and processed a request
-                    return
+                    requestsFound = true
+                    
+                    if let requestedById = request.requestedBy {
+                        self.userService.getUserByID(uid: requestedById) { user in
+                            if let user = user {
+                                existingRequest?.requestedUserDetail = user
+                            } else {
+                                completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Error fetching user details."])))
+                                return
+                            }
+                            
+                            if requestsFound {
+                                if let existingRequest = existingRequest {
+                                    completion(.success(existingRequest))
+                                } else {
+                                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Request not found."])))
+                                }
+                            }
+                        }
+                    } else {
+                        completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "RequestedBy ID is missing."])))
+                        return
+                    }
+                    
+                    break
                 }
-
-                if !dataFound {
-                    callback.onSuccess([])
+                
+                if !requestsFound {
+                    completion(.failure(NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "No request found."])))
                 }
             } withCancel: { error in
-                callback.onFailure(error.localizedDescription)
+                completion(.failure(error))
             }
     }
-
 
         
 //    
@@ -102,7 +110,7 @@ class RequestFoodService {
 //    }
     
     func fetchDonationRequests(userId: String, callback: @escaping ([String]) -> Void) {
-        reference.child(Self.collectionName)
+        reference.child(collectionName)
             .queryOrdered(byChild: "requestedBy")
             .queryEqual(toValue: userId)
             .observeSingleEvent(of: .value) { snapshot in

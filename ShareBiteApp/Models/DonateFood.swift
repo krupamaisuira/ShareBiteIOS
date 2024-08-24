@@ -2,13 +2,7 @@ import Foundation
 import UIKit
 import Firebase
 
-
-extension DonateFood: Identifiable {
-    var id: String {
-        donationId ?? UUID().uuidString // Use donationId if available, otherwise generate a UUID
-    }
-}
-class DonateFood {
+class DonateFood: Decodable, Identifiable {
     var donationId: String?
     var donatedBy: String
     var title: String
@@ -20,12 +14,16 @@ class DonateFood {
     var updatedOn: String?
     var status: Int
     var location: Location?
-    var imageUris: [URL]
+    var imageUris: [URL]?
     var uploadedImageUris: [URL]?
     var requestedBy: RequestFood?
     var saveImage: [UIImage]?
 
-    init(donatedBy: String, title: String, description: String, bestBefore: String, price: Double, location: Location, imageUris: [URL], status: Int = FoodStatus.available.rawValue,saveImage : [UIImage]) {
+    var id: String {
+        donationId ?? UUID().uuidString
+    }
+
+    init(donatedBy: String, title: String, description: String, bestBefore: String, price: Double, location: Location, imageUris: [URL], status: Int = FoodStatus.available.rawValue, saveImage: [UIImage]) {
         self.donatedBy = donatedBy
         self.title = title
         self.description = description
@@ -38,32 +36,18 @@ class DonateFood {
         self.imageUris = imageUris
         self.saveImage = saveImage
     }
-    init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: Any] else {
-            print("Failed to cast snapshot value to dictionary: \(snapshot.value ?? "No value")")
+
+    init?(from dict: [String: Any]) {
+        guard let donatedBy = dict["donatedBy"] as? String,
+              let title = dict["title"] as? String,
+              let description = dict["description"] as? String,
+              let bestBefore = dict["bestBefore"] as? String,
+              let price = dict["price"] as? Double,
+              let foodDeleted = dict["foodDeleted"] as? Bool,
+              let createdOn = dict["createdOn"] as? String,
+              let status = dict["status"] as? Int else {
             return nil
         }
-
-        let donatedBy = dict["donatedBy"] as? String ?? "Unknown donor"
-        let title = dict["title"] as? String ?? "Untitled"
-        let description = dict["description"] as? String ?? "No description"
-        let bestBefore = dict["bestBefore"] as? String ?? "N/A"
-        let price = dict["price"] as? Double ?? 0.0
-        let foodDeleted = dict["foodDeleted"] as? Bool ?? false
-        let createdOn = dict["createdOn"] as? String ?? "Unknown date"
-        let status = dict["status"] as? Int ?? 0
-
-        var location: Location? = nil
-        if let locationDict = dict["location"] as? [String: Any],
-           let address = locationDict["address"] as? String,
-           let latitude = locationDict["latitude"] as? Double,
-           let longitude = locationDict["longitude"] as? Double {
-            location = Location(address: address, latitude: latitude, longitude: longitude)
-        } else {
-            print("Location data is missing or incomplete. Proceeding without location.")
-        }
-
-        let imageUrisStrings = dict["imageUris"] as? [String] ?? []
 
         self.donatedBy = donatedBy
         self.title = title
@@ -73,44 +57,45 @@ class DonateFood {
         self.foodDeleted = foodDeleted
         self.createdOn = createdOn
         self.status = status
-        self.location = location
+        self.updatedOn = dict["updatedOn"] as? String
+        
+        if let locationDict = dict["location"] as? [String: Any],
+           let address = locationDict["address"] as? String,
+           let latitude = locationDict["latitude"] as? Double,
+           let longitude = locationDict["longitude"] as? Double {
+            self.location = Location(address: address, latitude: latitude, longitude: longitude)
+        } else {
+            self.location = nil
+        }
+
+        let imageUrisStrings = dict["imageUris"] as? [String] ?? []
         self.imageUris = imageUrisStrings.compactMap { URL(string: $0) }
         self.uploadedImageUris = nil
         self.saveImage = nil
-        self.donationId = snapshot.key
     }
-//    init?(snapshot: DataSnapshot) {
-//           guard let dict = snapshot.value as? [String: Any],
-//                 let donatedBy = dict["donatedBy"] as? String,
-//                 let title = dict["title"] as? String,
-//                 let description = dict["description"] as? String,
-//                 let bestBefore = dict["bestBefore"] as? String,
-//                 let price = dict["price"] as? Double,
-//                 let foodDeleted = dict["foodDeleted"] as? Bool,
-//                 let createdOn = dict["createdOn"] as? String,
-//                 let status = dict["status"] as? Int,
-//                 let locationDict = dict["location"] as? [String: Any],
-//               
-//                 let address = locationDict["address"] as? String,
-//                 let latitude = locationDict["latitude"] as? Double,
-//                 let longitude = locationDict["longitude"] as? Double,
-//                 let imageUrisStrings = dict["imageUris"] as? [String] else {
-//               return nil
-//           }
-//        self.donatedBy = donatedBy
-//               self.title = title
-//               self.description = description
-//               self.bestBefore = bestBefore
-//               self.price = price
-//               self.foodDeleted = foodDeleted
-//               self.createdOn = createdOn
-//               self.status = status
-//               self.location = Location(address: address, latitude: latitude, longitude: longitude)
-//               self.imageUris = imageUrisStrings.compactMap { URL(string: $0) }
-//               self.uploadedImageUris = nil  // Default to nil unless populated later
-//               self.saveImage = nil  // Default to nil unless populated later
-//               self.donationId = snapshot.key
-//    }
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        self.donationId = try? container.decode(String.self, forKey: .donationId)
+        self.donatedBy = try container.decode(String.self, forKey: .donatedBy)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.description = try container.decode(String.self, forKey: .description)
+        self.bestBefore = try container.decode(String.self, forKey: .bestBefore)
+        self.price = try container.decode(Double.self, forKey: .price)
+        self.foodDeleted = try container.decode(Bool.self, forKey: .foodDeleted)
+        self.createdOn = try container.decode(String.self, forKey: .createdOn)
+        self.updatedOn = try? container.decode(String.self, forKey: .updatedOn)
+        self.status = try container.decode(Int.self, forKey: .status)
+        self.location = try? container.decode(Location.self, forKey: .location)
+        self.imageUris = try? container.decode([String].self, forKey: .imageUris).compactMap { URL(string: $0) }
+        self.uploadedImageUris = nil
+        self.saveImage = nil
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case donationId, donatedBy, title, description, bestBefore, price, foodDeleted, createdOn, updatedOn, status, location, imageUris
+    }
 
     func getFoodStatus() -> String {
         return FoodStatus.getByIndex(status)?.toString() ?? "Expired"
@@ -141,6 +126,3 @@ class DonateFood {
         return result
     }
 }
-
-
-

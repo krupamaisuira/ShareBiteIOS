@@ -1,6 +1,6 @@
 import Foundation
 
-class Location {
+class Location  : Decodable{
     var locationId: String?
     var donationId: String?
     var address: String
