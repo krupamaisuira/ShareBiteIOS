@@ -66,7 +66,8 @@ class RequestFood : Decodable {
     func toMapUpdate() -> [String: Any] {
         var result: [String: Any] = [
             "requestId": requestId,
-            "requestforId": requestforId
+            "requestforId": requestforId,
+            "requestedBy":requestedBy
         ]
         return result
     }
