@@ -34,11 +34,16 @@
                            
                 
                 HStack {
-                    Text(donateFood.title)
-                        .font(.system(size: 16, weight: .bold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .lineLimit(2)
-                        .truncationMode(.tail)
+                    NavigationLink(destination: DonatedFoodDetailView(donationId: donateFood.donationId ?? "")) {
+                        Text(donateFood.title)
+                            .font(.system(size: 16, weight: .bold))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .lineLimit(2)
+                            .truncationMode(.tail)
+                    }
+                    .buttonStyle(PlainButtonStyle())
+                    
+                    
                     
                     HStack(spacing: 0){
                         Button(action: {
@@ -65,5 +70,6 @@
             .cornerRadius(12)
             .shadow(radius: 4)
             .frame(width: 150, height: 180)
+            .contentShape(Rectangle())
         }
     }

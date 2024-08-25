@@ -14,7 +14,7 @@ struct BottomNavigationView: View {
                 }
                 .tag(0)
             
-            RequestFoodDetailView()
+            RequestFoodListView()
                 .tabItem {
                     Image(systemName: "cart")
                     Text("Request Food")

@@ -39,6 +39,7 @@ class DonateFood: Decodable, Identifiable {
 
     init?(from dict: [String: Any]) {
         guard let donatedBy = dict["donatedBy"] as? String,
+              let donationId  = dict["donationId"] as? String,
               let title = dict["title"] as? String,
               let description = dict["description"] as? String,
               let bestBefore = dict["bestBefore"] as? String,
@@ -48,7 +49,8 @@ class DonateFood: Decodable, Identifiable {
               let status = dict["status"] as? Int else {
             return nil
         }
-
+        
+        self.donationId = donationId
         self.donatedBy = donatedBy
         self.title = title
         self.description = description
