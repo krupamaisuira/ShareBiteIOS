@@ -7,7 +7,7 @@ struct RequestFoodListView: View {
     let gridItems = [GridItem(.flexible()), GridItem(.flexible())] // Two columns
     @ObservedObject private var sessionManager = SessionManager.shared
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 HStack {
                     Text("Request Food")
@@ -107,7 +107,7 @@ struct CardView: View {
                     .lineLimit(2)
                     .truncationMode(.tail)
 
-                NavigationLink(destination: DonatedFoodDetailView(donationId: donateFood.donationId ?? "")) {
+                NavigationLink(destination: RequestFoodDetailView(donationId: donateFood.donationId ?? "")) {
                     Image(systemName: "cart.fill")
                         .resizable()
                         .scaledToFit()

@@ -304,5 +304,14 @@ class DonateFoodService {
             completion(.failure(error))
         }
     }
+    func updateFoodStatus(uid: String, status: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        reference.child(collectionName).child(uid).child("status").setValue(status) { error, _ in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 
 }
