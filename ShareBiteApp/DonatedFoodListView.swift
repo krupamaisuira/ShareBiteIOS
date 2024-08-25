@@ -12,63 +12,65 @@ struct DonatedFoodListView: View {
     @ObservedObject private var sessionManager = SessionManager.shared
     
     var body: some View {
-        VStack(spacing: 0) {
-            HStack {
-                Text("Donations Food")
-                    .font(.system(size: 18, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding(.leading, 5)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Button(action: {
-                    // Navigate to Food Requested view
-                }) {
-                    Text("Food Requested")
+        NavigationView {
+            VStack(spacing: 0) {
+                HStack {
+                    Text("Donations Food")
+                        .font(.system(size: 18, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding(.leading, 5)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button(action: {
+                        // Navigate to Food Requested view
+                    }) {
+                        Text("Food Requested")
+                    }
+                    .padding(.trailing, 5)
                 }
-                .padding(.trailing, 5)
-            }
-            .padding(.top, 16)
-            
-            Divider()
-                .padding(.top, 10)
-            
-            Text("Welcome to our food donation list page! Your generosity can make a big difference in the lives of those in need")
-                .font(.system(size: 14))
-                .padding(16)
-                .multilineTextAlignment(.center)
-            
-            ScrollView {
-                LazyVGrid(columns: gridItems, spacing: 16) {
-                    ForEach(donatedFoods) { food in
-                        DonatedFoodCardView(donateFood: food, onDelete: {
-                            // Prepare for deletion
-                            self.deleteAction = {
-                                deleteDonatedFood(food)
-                            }
-                            self.showConfirmationAlert = true
-                        })
+                .padding(.top, 16)
+                
+                Divider()
+                    .padding(.top, 10)
+                
+                Text("Welcome to our food donation list page! Your generosity can make a big difference in the lives of those in need")
+                    .font(.system(size: 14))
+                    .padding(16)
+                    .multilineTextAlignment(.center)
+                
+                ScrollView {
+                    LazyVGrid(columns: gridItems, spacing: 16) {
+                        ForEach(donatedFoods) { food in
+                            DonatedFoodCardView(donateFood: food, onDelete: {
+                                // Prepare for deletion
+                                self.deleteAction = {
+                                    deleteDonatedFood(food)
+                                }
+                                self.showConfirmationAlert = true
+                            })
                             .padding(16)
                             .background(Color.white)
+                        }
                     }
+                    .padding(.horizontal, 10)
+                    .padding(.top, 10)
                 }
-                .padding(.horizontal, 10)
-                .padding(.top, 10)
             }
-        }
-        .onAppear {
-            fetchDonatedFoods()
-        }
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text(successMessage ?? "Error"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))
-        }
-        .alert(isPresented: $showConfirmationAlert) {
-            Alert(
-                title: Text("Are you sure you want to delete this item?"),
-                primaryButton: .destructive(Text("Delete")) {
-                    deleteAction?()
-                },
-                secondaryButton: .cancel()
-            )
+            .onAppear {
+                fetchDonatedFoods()
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text(successMessage ?? "Error"), message: Text(errorMessage ?? ""), dismissButton: .default(Text("OK")))
+            }
+            .alert(isPresented: $showConfirmationAlert) {
+                Alert(
+                    title: Text("Are you sure you want to delete this item?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        deleteAction?()
+                    },
+                    secondaryButton: .cancel()
+                )
+            }
         }
     }
     private func fetchDonatedFoods() {

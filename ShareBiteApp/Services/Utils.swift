@@ -68,5 +68,24 @@ struct Utils {
             return (textColor: .white, backgroundColor: .blue)
         }
     }
+    static func isFoodExpired(bestBeforeDateStr: String) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        if let bestBeforeDate = dateFormatter.date(from: bestBeforeDateStr) {
+            let currentDate = Date()
+            
+            if bestBeforeDate < currentDate {
+                // The food is expired, return 0
+                return 0
+            } else {
+                // The food is not expired, return 1
+                return 1
+            }
+        } else {
+            // If parsing the date fails, return 0
+            return 0
+        }
+    }
 }
 
