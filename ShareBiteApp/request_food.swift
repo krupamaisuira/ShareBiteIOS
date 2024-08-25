@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct request_food: View {
-    
+    let location: String
     
     var body: some View {
         
@@ -49,7 +49,7 @@ struct request_food: View {
             Text("Show the confirmation code you received via SMS to the staff at the pickup location")
                 .font(.system(size: 17))
         }.padding(.bottom, 8)
-        Text("Pickup Location : Monteal , Quebec, H3N 2N6")
+        Text("Pickup Location : \(location)")
             .font(.system(size:17))
             .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
             .padding(.bottom, 2)
@@ -93,6 +93,6 @@ struct request_food: View {
     }
 }
 
-#Preview {
-    request_food()
-}
+//#Preview {
+//    request_food(location)
+//}
