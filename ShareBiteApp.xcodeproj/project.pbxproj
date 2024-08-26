@@ -15,6 +15,7 @@
 		012206512C7C1F120083BCA1 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012206502C7C1F120083BCA1 /* Report.swift */; };
 		01B8CD802C7C4A9B0079B552 /* DonationSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B8CD7F2C7C4A9B0079B552 /* DonationSuccessView.swift */; };
 		01DC17122C7C5895000B32B6 /* FoodRequestedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC17112C7C5895000B32B6 /* FoodRequestedListView.swift */; };
+		01DC17142C7CDE9A000B32B6 /* DonateFoodUpdateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01DC17132C7CDE9A000B32B6 /* DonateFoodUpdateView.swift */; };
 		CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */; };
 		CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8F2C46AD9300903B9A /* HeaderView.swift */; };
 		CE160F942C4D59B900903B9A /* request_food.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F932C4D59B900903B9A /* request_food.swift */; };
@@ -83,6 +84,7 @@
 		012206502C7C1F120083BCA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		01B8CD7F2C7C4A9B0079B552 /* DonationSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationSuccessView.swift; sourceTree = "<group>"; };
 		01DC17112C7C5895000B32B6 /* FoodRequestedListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodRequestedListView.swift; sourceTree = "<group>"; };
+		01DC17132C7CDE9A000B32B6 /* DonateFoodUpdateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateFoodUpdateView.swift; sourceTree = "<group>"; };
 		CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		CE160F8F2C46AD9300903B9A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE160F932C4D59B900903B9A /* request_food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = request_food.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 				0122064C2C7A30300083BCA1 /* DonatedFoodDetailView.swift */,
 				0122064E2C7BF0960083BCA1 /* ShowRequestHistoryView.swift */,
 				01B8CD7F2C7C4A9B0079B552 /* DonationSuccessView.swift */,
+				01DC17132C7CDE9A000B32B6 /* DonateFoodUpdateView.swift */,
 			);
 			path = ShareBiteApp;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */,
 				CE9C1A092C630D3C00BCA9C8 /* DonateFood.swift in Sources */,
 				0122064F2C7BF0960083BCA1 /* ShowRequestHistoryView.swift in Sources */,
+				01DC17142C7CDE9A000B32B6 /* DonateFoodUpdateView.swift in Sources */,
 				0122064B2C7A16F10083BCA1 /* FoodStatus.swift in Sources */,
 				CE9C1A032C62E9AB00BCA9C8 /* Photo.swift in Sources */,
 				CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */,

@@ -53,12 +53,10 @@
                     
                     
                     HStack(spacing: 0){
-                        Button(action: {
-                            // Edit action
-                        }) {
-                            Image(systemName: "pencil")
-                                .padding(2)
-                        }
+                        NavigationLink(destination: DonateFoodUpdateView(donationId: donateFood.donationId ?? "")) {
+                                                Image(systemName: "pencil")
+                                                    .padding(2)
+                                            }
                         .buttonStyle(PlainButtonStyle())
                         
                         Button(action: {

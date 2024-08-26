@@ -499,4 +499,27 @@ class DonateFoodService {
             completion(.failure(error))
         }
     }
+   
+    func updateDonatedFood(food: DonateFood, completion: @escaping (Result<Void, Error>) -> Void) {
+       
+        food.updatedOn = Utils.getCurrentDatetime()
+        
+        guard let donationId = food.donationId else {
+    
+            let error = NSError(domain: "UpdateError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Donation ID is missing."])
+            completion(.failure(error))
+            return
+        }
+        
+        reference.child(collectionName).child(donationId).updateChildValues(food.toMapUpdate()) { error, _ in
+            if let error = error {
+               
+                completion(.failure(error))
+            } else {
+               
+                completion(.success(()))
+            }
+        }
+    }
+
 }

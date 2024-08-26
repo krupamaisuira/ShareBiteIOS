@@ -7,9 +7,18 @@ class Location  : Decodable{
     var latitude: Double
     var longitude: Double
     var createdOn: String?
+    var updatedOn: String?
     
 
     init(donationId: String, address: String, latitude: Double, longitude: Double) {
+        self.donationId = donationId
+        self.address = address
+        self.latitude = latitude
+        self.longitude = longitude
+        self.createdOn = Utils.getCurrentDatetime()
+    } 
+    init(locationId : String, donationId: String, address: String, latitude: Double, longitude: Double) {
+        self.locationId = locationId
         self.donationId = donationId
         self.address = address
         self.latitude = latitude
@@ -27,6 +36,7 @@ class Location  : Decodable{
         result["address"] = address
         result["longitude"] = longitude
         result["latitude"] = latitude
+        result["updatedOn"] = updatedOn
         
         return result
     }

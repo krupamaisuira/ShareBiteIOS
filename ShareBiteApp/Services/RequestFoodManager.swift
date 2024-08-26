@@ -9,11 +9,6 @@ import Foundation
 import Firebase
 
 
-protocol OperationCallbackList {
-    associatedtype T
-    func onSuccess<T>(_ result: [T])
-    func onFailure(_ error: String)
-}
 class RequestFoodService {
     
     private let reference: DatabaseReference
