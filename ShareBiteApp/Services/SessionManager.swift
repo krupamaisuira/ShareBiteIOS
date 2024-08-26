@@ -28,6 +28,7 @@ class SessionManager : ObservableObject {
         do {
             try Auth.auth().signOut()
             currentUser = nil
+            
         } catch {
             print("Error signing out: \(error.localizedDescription)")
         }

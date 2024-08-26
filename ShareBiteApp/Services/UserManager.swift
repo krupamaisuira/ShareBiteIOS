@@ -15,13 +15,37 @@ class UserManager : ObservableObject{
     private let database = Database.database().reference();
   //  private let sessionManager = SessionManager()
     private let _collection = "users";
-    func registerUser(_user: Users){
-        let itemRef = database.child(_collection).child(_user.id)
-        itemRef.setValue(["userid" : _user.id,"username": _user.username,"email": _user.email,
-                          "mobilenumber": _user.mobilenumber,"profiledeleted": _user.profiledeleted,"notification": _user.notification,
-                          "createdon" : _user.createdon.timeIntervalSinceNow
-                         ]);
-    }
+    
+    func registerUser(_user: Users, completion: @escaping (Bool) -> Void) {
+            let itemRef = database.child(_collection).child(_user.id)
+            
+            let userData: [String: Any] = [
+                "userid": _user.id,
+                "username": _user.username,
+                "email": _user.email,
+                "mobilenumber": _user.mobilenumber,
+                "profiledeleted": _user.profiledeleted,
+                "notification": _user.notification,
+                "createdon": _user.createdon.timeIntervalSince1970 // Use timeIntervalSince1970 for timestamp
+            ]
+            
+            itemRef.setValue(userData) { error, _ in
+                if let error = error {
+                    print("Error writing user data: \(error.localizedDescription)")
+                    completion(false) // Call completion with false if there's an error
+                } else {
+                    completion(true) // Call completion with true if the data is successfully written
+                }
+            }
+        }
+//    
+//    func registerUser(_user: Users){
+//        let itemRef = database.child(_collection).child(_user.id)
+//        itemRef.setValue(["userid" : _user.id,"username": _user.username,"email": _user.email,
+//                          "mobilenumber": _user.mobilenumber,"profiledeleted": _user.profiledeleted,"notification": _user.notification,
+//                          "createdon" : _user.createdon.timeIntervalSinceNow
+//                         ]);
+//    }
     func fetchUserByUserID(withID id: String, completion: @escaping (SessionUsers?) -> Void) {
         let usersRef = database.child("users")
         

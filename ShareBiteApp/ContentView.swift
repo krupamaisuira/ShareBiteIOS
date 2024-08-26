@@ -10,6 +10,7 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 if sessionManager.isLoggedIn {
+                    
                     HeaderView()
                     Divider().background(Color.blue)
                     BottomNavigationView(selectedTab: selectedTab)
@@ -36,19 +37,23 @@ struct ContentView: View {
     }
     
     private func checkAuthentication() {
-        Auth.auth().addStateDidChangeListener { auth, user in
-            if let user = user {
-                sessionManager.loginUser(userid: user.uid) { success in
-                    // Handle successful login
+        if let user = Auth.auth().currentUser {
+            // User is signed in, fetch user details and update session
+            sessionManager.loginUser(userid: user.uid) { success in
+                if success {
                     print("User logged in: \(success)")
+                } else {
+                    print("Failed to fetch user details")
+                    // Optionally handle the failure to fetch user details
                 }
-            } else {
-                // Handle user not logged in
-                print("No user logged in")
-                sessionManager.logoutUser()
             }
+        } else {
+            // User is signed out
+            sessionManager.logoutUser()
+            print("No user logged in")
         }
     }
+
 }
 
 struct ContentView_Preview: PreviewProvider {
