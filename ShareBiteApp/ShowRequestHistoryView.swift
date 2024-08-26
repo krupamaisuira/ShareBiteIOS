@@ -15,7 +15,7 @@ struct ShowRequestHistoryView: View {
     @ObservedObject private var sessionManager = SessionManager.shared
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 0) {
                 HStack {
                     Text("Your Collections")
                         .font(.system(size: 18, weight: .bold))
@@ -38,9 +38,12 @@ struct ShowRequestHistoryView: View {
                     LazyVGrid(columns: gridItems, spacing: 16) {
                         ForEach(donatedFoods) { item in
                             HistoryCardView(donateFood: item)
+                                .padding(16)
+                                .background(Color.white)
                         }
                     }
-                    .padding()
+                    .padding(.horizontal, 10)
+                    .padding(.top, 10)
                 }
             }
             .onAppear {

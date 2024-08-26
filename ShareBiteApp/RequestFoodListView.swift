@@ -8,7 +8,7 @@ struct RequestFoodListView: View {
     @ObservedObject private var sessionManager = SessionManager.shared
     var body: some View {
         NavigationStack {
-            VStack {
+            VStack(spacing: 0){
                 HStack {
                     Text("Request Food")
                         .font(.system(size: 18, weight: .bold))
@@ -35,9 +35,12 @@ struct RequestFoodListView: View {
                     LazyVGrid(columns: gridItems, spacing: 16) {
                         ForEach(donatedFoods) { item in
                             CardView(donateFood: item)
+                                .padding(16)
+                                .background(Color.white)
                         }
                     }
-                    .padding()
+                    .padding(.horizontal, 10)
+                    .padding(.top, 10)
                 }
             }
             .onAppear {
@@ -117,7 +120,11 @@ struct CardView: View {
                 .buttonStyle(PlainButtonStyle())
             }.padding(.top, 8)
             
-            Text(donateFood.price > 0 ? "$\(donateFood.price)" : "Free")
+            Text(donateFood.price > 0
+                ? (donateFood.price.truncatingRemainder(dividingBy: 1) == 0
+                    ? "Price: $\(Int(donateFood.price))"
+                    : String(format: "Price: $%.2f", donateFood.price))
+                : "Price: Free")
                                     .font(.system(size: 14, weight: .bold))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     
