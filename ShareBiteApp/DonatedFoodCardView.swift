@@ -3,6 +3,13 @@
     struct DonatedFoodCardView: View {
         var donateFood: DonateFood
         var onDelete: () -> Void
+        init(donateFood: DonateFood, onDelete: @escaping () -> Void) {
+                self.donateFood = donateFood
+                self.onDelete = onDelete
+                updateFoodStatus()
+            }
+            
+            
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
              
@@ -72,4 +79,9 @@
             .frame(width: 150, height: 180)
             .contentShape(Rectangle())
         }
+        private func updateFoodStatus() {
+               if Utils.isFoodExpired(bestBeforeDateStr: donateFood.bestBefore) == 0 {
+                   donateFood.status = FoodStatus.expired.rawValue
+               }
+           }
     }

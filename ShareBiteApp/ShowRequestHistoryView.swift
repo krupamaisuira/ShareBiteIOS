@@ -1,6 +1,13 @@
+//
+//  ShowRequestHistoryView.swift
+//  ShareBiteApp
+//
+//  Created by Vivek Patel on 2024-08-25.
+//
+
 import SwiftUI
 
-struct RequestFoodListView: View {
+struct ShowRequestHistoryView: View {
     @State private var donatedFoods: [DonateFood] = []
     @State private var errorMessage: String?
 
@@ -10,23 +17,19 @@ struct RequestFoodListView: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("Request Food")
+                    Text("Your Collections")
                         .font(.system(size: 18, weight: .bold))
                         .foregroundColor(.black)
                         .padding(.leading, 5)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    NavigationLink(destination: ShowRequestHistoryView()) {
-                                           Text("Collections")
-                                       }
-                    .padding(.trailing, 5)
                 }
                 .padding(.top, 16)
                 
                 Divider()
                     .padding(.top, 10)
                 
-                Text("Browse available food donations and request items that you need. Help us reduce waste and feed those in need")
+                Text("Thank you for your support! Please review the requested food donations below and cancel any items no longer needed. This helps us minimize waste and ensure the food reaches those in need.")
                     .font(.system(size: 14))
                     .padding(16)
                     .multilineTextAlignment(.center)
@@ -34,7 +37,7 @@ struct RequestFoodListView: View {
                 ScrollView {
                     LazyVGrid(columns: gridItems, spacing: 16) {
                         ForEach(donatedFoods) { item in
-                            CardView(donateFood: item)
+                            HistoryCardView(donateFood: item)
                         }
                     }
                     .padding()
@@ -46,23 +49,23 @@ struct RequestFoodListView: View {
         }
     }
     private func fetchDonatedFoods() {
-            let donateFoodService = DonateFoodService()
-            if let userId = sessionManager.getCurrentUser()?.id {
-                donateFoodService.getAllRequestFoodList(userId: userId) { result in
-                    switch result {
-                    case .success(let foods):
-                        self.donatedFoods = foods
-    
-                    case .failure(let error):
-                        self.errorMessage = error.localizedDescription
-    
-                    }
+        let donateFoodService = DonateFoodService()
+        if let userId = sessionManager.getCurrentUser()?.id {
+            donateFoodService.fetchRequestedDonationList(userId: userId) { foods, errorMessage in
+                if let errorMessage = errorMessage {
+                    self.errorMessage = errorMessage
+                } else if let foods = foods {
+                    self.donatedFoods = foods
+                    print("donated food in history \(foods.count)")
+                } else {
+                    self.errorMessage = "Unexpected error occurred."
                 }
-            } else {
-                self.errorMessage = "donor is missing"
-    
             }
+        } else {
+            self.errorMessage = "Donor is missing"
         }
+    }
+
 //    private func fetchDonatedFoods() {
 //        let donateFoodService = DonateFoodService()
 //        let userId = "EnKWlvpXBlR47CTjsZ5RTQfJhs52"
@@ -79,9 +82,12 @@ struct RequestFoodListView: View {
 //    }
 }
 
-struct CardView: View {
+struct HistoryCardView: View {
     var donateFood: DonateFood
-
+    init(donateFood: DonateFood) {
+            self.donateFood = donateFood
+            updateFoodStatus()
+        }
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
             if let url = donateFood.uploadedImageUris?.first {
@@ -97,15 +103,39 @@ struct CardView: View {
                     .background(Color.gray.opacity(0.2))
                     .cornerRadius(8)
             }
-            
+            let foodStatusIndex = donateFood.status
+                       if let foodStatus = FoodStatus.getByIndex(foodStatusIndex) {
+                           let statusColors = Utils.setStatusColors(for: foodStatus)
+                           
+                           Text(foodStatus.toString())
+                               .font(.system(size: 14))
+                               .padding(.horizontal, 4)
+                               .background(statusColors.backgroundColor)
+                               .foregroundColor(statusColors.textColor)
+                               .cornerRadius(4)
+                               .frame(width: 150, alignment: .leading)
+            }
             HStack {
-                Text(donateFood.title)
-                    .font(.system(size: 16, weight: .bold))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .lineLimit(2)
-                    .truncationMode(.tail)
-
-                NavigationLink(destination: RequestFoodDetailView(donationId: donateFood.donationId ?? "",showcancelled: 0)) {
+               
+                    Text(donateFood.title)
+                        .font(.system(size: 16, weight: .bold))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .lineLimit(2)
+                        .truncationMode(.tail)
+               
+                
+                NavigationLink(destination: RequestFoodDetailView(donationId: donateFood.donationId ?? "" ,showcancelled : 1)) {
+                    Image(systemName: "info.circle")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30, height: 30)
+                        // .padding()
+                        //.background(Color.blue.opacity(0.2))
+                        .clipShape(Circle())
+                }
+                .buttonStyle(PlainButtonStyle())
+                
+                NavigationLink(destination: request_food(location: donateFood.location?.address ?? "")) {
                     Image(systemName: "cart.fill")
                         .resizable()
                         .scaledToFit()
@@ -115,13 +145,8 @@ struct CardView: View {
                         .clipShape(Circle())
                 }
                 .buttonStyle(PlainButtonStyle())
-            }.padding(.top, 8)
-            
-            Text(donateFood.price > 0 ? "$\(donateFood.price)" : "Free")
-                                    .font(.system(size: 14, weight: .bold))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    
-            
+            }
+            .padding(.top, 8)
         }
         .padding(8)
         .background(Color.white)
@@ -130,8 +155,16 @@ struct CardView: View {
         .frame(width: 150, height: 180)
         .contentShape(Rectangle()) // Ensures the whole view responds to taps
     }
+    private func updateFoodStatus() {
+           if Utils.isFoodExpired(bestBeforeDateStr: donateFood.bestBefore) == 0 {
+               donateFood.status = FoodStatus.expired.rawValue
+           }
+       }
 }
 
+
+
+
 #Preview {
-    RequestFoodListView()
+    ShowRequestHistoryView()
 }
