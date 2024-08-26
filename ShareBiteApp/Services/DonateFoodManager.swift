@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseDatabase
 import FirebaseStorage
 
 
 
 class DonateFoodService {
-    private let db = Firestore.firestore()
+   
     private let storage = Storage.storage().reference()
     private let locationService = LocationService()
     private let photoService = PhotoService()
@@ -397,6 +397,42 @@ class DonateFoodService {
         }
     }
 
-
-
+    func fetchReport(userId: String, completion: @escaping (Result<Report, Error>) -> Void) {
+        
+        reference.child(collectionName)
+            .queryOrdered(byChild: "donatedBy")
+            .queryEqual(toValue: userId)
+            .observeSingleEvent(of: .value) { snapshot in
+                var donationsCount = 0
+                
+                for child in snapshot.children {
+                    if let snapshot = child as? DataSnapshot,
+                       let dict = snapshot.value as? [String: Any],
+                       let model = DonateFood(from: dict),
+                       model.status == FoodStatus.donated.rawValue,
+                       !model.foodDeleted {
+                        donationsCount += 1
+                    }
+                }
+                
+                // Fetch donation requests count using the callback-based method
+                RequestFoodService().fetchDonationRequests(userId: userId) { donationIds, errorMessage in
+                    if let errorMessage = errorMessage {
+                        
+                        let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: errorMessage])
+                        completion(.failure(error))
+                    } else if let donationIds = donationIds {
+                        let collections = donationIds.count
+                        let report = Report(collections: collections, donations: donationsCount)
+                        completion(.success(report))
+                    } else {
+                        
+                        let error = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Unknown error occurred."])
+                        completion(.failure(error))
+                    }
+                }
+            } withCancel: { error in
+                completion(.failure(error))
+            }
+    }
 }
