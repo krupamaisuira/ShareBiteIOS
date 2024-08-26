@@ -66,7 +66,11 @@ struct RequestFoodDetailView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 16) // Added padding
 
-                    Text(food.price > 0 ? "Price: $\(food.price)" : "Price: Free")
+                    Text(food.price > 0
+                        ? (food.price.truncatingRemainder(dividingBy: 1) == 0
+                            ? "Price: $\(Int(food.price))"
+                            : String(format: "Price: $%.2f", food.price))
+                        : "Price: Free")
                                             .font(.system(size: 16, weight: .bold))
                                             .padding(.bottom, 5)
                                             .frame(maxWidth: .infinity, alignment: .leading)

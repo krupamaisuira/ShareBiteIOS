@@ -109,27 +109,27 @@ class RequestFoodService {
         }
     }
     
-    func fetchDonationRequests(userId: String, callback: @escaping ([String]) -> Void) {
-        reference.child(collectionName)
-            .queryOrdered(byChild: "requestedBy")
-            .queryEqual(toValue: userId)
-            .observeSingleEvent(of: .value) { snapshot in
-                var donationIds = [String]()
-                for child in snapshot.children.allObjects as! [DataSnapshot] {
-                    guard let model = RequestFood(snapshot: child),
-                          let requestforId = model.requestforId,
-                          model.cancelon == nil else {
-                        continue
-                    }
-
-                    donationIds.append(requestforId)
-                }
-
-                callback(donationIds)
-            } withCancel: { error in
-                print(error.localizedDescription) // Log the error or use another callback for failure
-            }
-    }
+//    func fetchDonationRequests(userId: String, callback: @escaping ([String]) -> Void) {
+//        reference.child(collectionName)
+//            .queryOrdered(byChild: "requestedBy")
+//            .queryEqual(toValue: userId)
+//            .observeSingleEvent(of: .value) { snapshot in
+//                var donationIds = [String]()
+//                for child in snapshot.children.allObjects as! [DataSnapshot] {
+//                    guard let model = RequestFood(snapshot: child),
+//                          let requestforId = model.requestforId,
+//                          model.cancelon == nil else {
+//                        continue
+//                    }
+//
+//                    donationIds.append(requestforId)
+//                }
+//
+//                callback(donationIds)
+//            } withCancel: { error in
+//                print(error.localizedDescription) // Log the error or use another callback for failure
+//            }
+//    }
     func fetchDonationRequests(userId: String, completion: @escaping ([String]?, String?) -> Void) {
        
         var donationIds: [String] = []

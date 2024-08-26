@@ -9,7 +9,7 @@ struct FoodRequestedListView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(alignment: .leading) {
+            VStack(spacing:0) {
                 Text("Food Requested")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.black)
@@ -28,9 +28,12 @@ struct FoodRequestedListView: View {
                     LazyVGrid(columns: gridItems, spacing: 16) {
                         ForEach(donatedFoods) { item in
                             RequestedListCardView(donateFood: item)
+                                .padding(16)
+                                .background(Color.white)
                         }
                     }
-                    .padding(16) // Adjust padding here if needed
+                    .padding(.horizontal, 10)
+                    .padding(.top, 10) // Adjust padding here if needed
                 }
             }
             .navigationTitle("Food Requested")
@@ -98,7 +101,11 @@ struct RequestedListCardView: View {
                 .buttonStyle(PlainButtonStyle())
             }.padding(.top, 8)
             
-            Text(donateFood.price > 0 ? "$\(donateFood.price)" : "Free")
+            Text(donateFood.price > 0
+                ? (donateFood.price.truncatingRemainder(dividingBy: 1) == 0
+                    ? "Price: $\(Int(donateFood.price))"
+                    : String(format: "Price: $%.2f", donateFood.price))
+                : "Price: Free")
                                     .font(.system(size: 14, weight: .bold))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     
