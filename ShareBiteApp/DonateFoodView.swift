@@ -14,7 +14,7 @@ struct DonateFoodView: View {
     @State private var photoModels: [Photos] = []
     
     @State private var donationId: String = "donationId123"
-    @State private var navigateToDashboard: Bool = false
+    @State private var navigateToSuccess: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var selectedDate = Date()
@@ -202,7 +202,7 @@ struct DonateFoodView: View {
                         Spacer()
                     }
                     
-                    NavigationLink(destination: DashboardView(), isActive: $navigateToDashboard) {
+                    NavigationLink(destination: DonationSuccessView(), isActive: $navigateToSuccess) {
                         EmptyView()
                     }
                 }
@@ -299,7 +299,7 @@ struct DonateFoodView: View {
             case .success:
                 // Navigate to Dashboard on success
                 DispatchQueue.main.async {
-                    self.navigateToDashboard = true
+                    self.navigateToSuccess = true
                 }
             case .failure(let error):
                 // Convert the error to a string and show an alert
