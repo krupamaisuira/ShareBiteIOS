@@ -435,4 +435,66 @@ class DonateFoodService {
                 completion(.failure(error))
             }
     }
+    func getUserRequestListByDonationById(userId: String, completion: @escaping (Result<[DonateFood], Error>) -> Void) {
+        let donateFoodRef = reference.child(collectionName)
+
+        donateFoodRef.observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            var donatedFoodList: [DonateFood] = []
+            var tempList: [DonateFood] = []
+
+            print("Snapshot value: \(snapshot.value ?? "No data")") // Debug line
+
+            for childSnapshot in snapshot.children {
+                if let childSnapshot = childSnapshot as? DataSnapshot {
+                    if let dict = childSnapshot.value as? [String: Any] {
+                        if let food = DonateFood(from: dict) {
+                            if !food.foodDeleted, food.donatedBy == userId,food.status == FoodStatus.requested.rawValue {
+                                food.donationId = childSnapshot.key
+                                tempList.append(food)
+                            }
+                        } else {
+                            print("Failed to initialize DonateFood from dictionary: \(dict)")
+                        }
+                    } else {
+                        print("Failed to cast childSnapshot value to dictionary: \(childSnapshot.value ?? "No value")")
+                    }
+                } else {
+                    print("Failed to cast childSnapshot to DataSnapshot")
+                }
+            }
+
+            if tempList.isEmpty {
+                print("temp list empty")
+                completion(.success(donatedFoodList))
+                return
+            }
+
+            let dispatchGroup = DispatchGroup()
+
+            for food in tempList {
+                if let donationId = food.donationId {
+                    dispatchGroup.enter()
+                    self.photoService.getAllPhotosByDonationId(donationId: donationId) { result in
+                        switch result {
+                        case .success(let imageUris):
+                            food.uploadedImageUris = imageUris
+                            
+                            donatedFoodList.append(food)
+                        case .failure(let error):
+                            print("Error fetching photos: \(error.localizedDescription)")
+                        }
+                        dispatchGroup.leave()
+                    }
+                }
+            }
+
+            dispatchGroup.notify(queue: .main) {
+                
+                completion(.success(donatedFoodList))
+            }
+        } withCancel: { error in
+            print("Error fetching data: \(error.localizedDescription)") // Debug line
+            completion(.failure(error))
+        }
+    }
 }

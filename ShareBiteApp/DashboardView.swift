@@ -17,7 +17,7 @@ struct DashboardView: View {
                                 .multilineTextAlignment(.center)
 
                             HStack(spacing: 16) {
-                                NavigationLink(destination: ShowRequestHistoryView()) {
+                                NavigationLink(destination: FoodRequestedListView()) {
                                         VStack {
                                             Image(systemName: "heart.fill")
                                                 .resizable()
