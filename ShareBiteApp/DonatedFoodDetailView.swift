@@ -5,9 +5,9 @@ struct DonatedFoodDetailView: View {
     @State private var donatedFood: DonateFood?
     @State private var error: Error?
     @State private var isLoading = false
-
+   
     let donationId: String
-
+    
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
@@ -224,12 +224,23 @@ struct DonatedFoodDetailView: View {
                 switch result {
                 case .success(let food):
                     donatedFood = food
+                    updateFoodStatus()
                 case .failure(let error):
                     self.error = error
                 }
             }
         }
     }
+    private func updateFoodStatus() {
+        
+        if let bestBeforeDate = donatedFood?.bestBefore {
+            print("best before data \(bestBeforeDate)")
+            if Utils.isFoodExpired(bestBeforeDateStr: bestBeforeDate) == 0 {
+                donatedFood?.status = FoodStatus.expired.rawValue
+            }
+        }
+    }
+
 }
 
 struct DonatedFoodDetailView_Previews: PreviewProvider {

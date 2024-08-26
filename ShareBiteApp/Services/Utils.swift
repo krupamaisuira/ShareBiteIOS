@@ -75,6 +75,8 @@ struct Utils {
         if let bestBeforeDate = dateFormatter.date(from: bestBeforeDateStr) {
             let currentDate = Date()
             
+            print("best before date \(bestBeforeDate)")
+            print("current date \(currentDate)")
             if bestBeforeDate < currentDate {
                 // The food is expired, return 0
                 return 0

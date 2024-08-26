@@ -16,7 +16,7 @@ struct RequestFoodDetailView: View {
     @State private var showCancelButton = false
     
     let donationId: String
-    let showcancelled: Int = 0
+    let showcancelled: Int
     @ObservedObject private var sessionManager = SessionManager.shared
     let requestFoodService = RequestFoodService()
     let donateFoodService = DonateFoodService()
@@ -315,6 +315,6 @@ struct RequestFoodDetailView: View {
 
 struct RequestFoodDetailView_Previews: PreviewProvider {
         static var previews: some View {
-            RequestFoodDetailView(donationId: "-O54tdChb-RRsMmR-LVn") // Provide a sample ID for preview
+            RequestFoodDetailView(donationId: "-O54tdChb-RRsMmR-LVn",showcancelled: 0) // Provide a sample ID for preview
         }
     }

@@ -314,4 +314,89 @@ class DonateFoodService {
         }
     }
 
+    func fetchRequestedDonationList(userId: String, completion: @escaping ([DonateFood]?, String?) -> Void) {
+        requestFoodService.fetchDonationRequests(userId: userId) { donationIds, error in
+            if let error = error {
+                completion(nil, "No Request found")
+                return
+            }
+            
+            guard let donationIds = donationIds, !donationIds.isEmpty else {
+                completion([], nil)
+                return
+            }
+
+            print("all donation id \(donationIds.count)")
+            print("first donation id \(donationIds.first)")
+
+            var donateFoodList: [DonateFood] = []
+            let group = DispatchGroup()
+
+            for donationId in donationIds {
+                group.enter()
+                self.getRequestDonationDetail(donationId: donationId) { result in
+                    switch result {
+                    case .success(let donateFood):
+                        print("get detail \(donateFood)")
+                        donateFoodList.append(donateFood)
+                    case .failure(let error):
+                        print("Error fetching detail for donationId \(donationId): \(error.localizedDescription)")
+                    }
+                    group.leave()
+                }
+            }
+
+            group.notify(queue: .main) {
+                completion(donateFoodList, nil)
+            }
+        }
+    }
+
+    func getRequestDonationDetail(donationId: String, completion: @escaping (Result<DonateFood, Error>) -> Void) {
+        reference.child(collectionName).child(donationId).observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
+            // Print the snapshot to debug
+            print("Snapshot value for donationId \(donationId): \(snapshot.value ?? "No value")")
+            
+            guard let food = snapshot.value as? [String: Any] else {
+                let error = NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "DonateFood not found."])
+                completion(.failure(error))
+                return
+            }
+            
+            // Attempt to decode the data into DonateFood
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: food, options: [])
+                let decoder = JSONDecoder()
+                var donateFood = try decoder.decode(DonateFood.self, from: jsonData)
+                donateFood.donationId = donationId
+                
+                self.photoService.getAllPhotosByDonationId(donationId: donationId) { result in
+                    switch result {
+                    case .success(let imageUris):
+                        donateFood.uploadedImageUris = imageUris
+                        print("history photo \(donateFood.uploadedImageUris?.count ?? 0)")
+                        
+                        self.locationService.getLocationByDonationId(uid: donationId) { result in
+                            switch result {
+                            case .success(let location):
+                                donateFood.location = location
+                                completion(.success(donateFood))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
+                }
+            } catch {
+                completion(.failure(error))
+            }
+        } withCancel: { error in
+            completion(.failure(error))
+        }
+    }
+
+
+
 }

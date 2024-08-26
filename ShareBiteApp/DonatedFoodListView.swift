@@ -129,6 +129,7 @@ struct DonatedFoodListView: View {
             }
         }
     }
+    
 }
 
 struct DonatedFoodListView_Previews: PreviewProvider {

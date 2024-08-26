@@ -42,13 +42,14 @@ class RequestFoodService {
         }
     }
     func isRequestFoodExist(requestforId: String, completion: @escaping (Result<RequestFood, Error>) -> Void) {
+        print("request for id \(requestforId)")
         reference.child(collectionName)
             .queryOrdered(byChild: "requestforId")
             .queryEqual(toValue: requestforId)
             .observeSingleEvent(of: .value) { (snapshot: DataSnapshot) in
                 var existingRequest: RequestFood?
                 var requestsFound = false
-                
+                print("request for donation detail \(snapshot.value)")
                 for child in snapshot.children {
                     guard let childSnapshot = child as? DataSnapshot,
                           let request = RequestFood(snapshot: childSnapshot) else {
@@ -59,6 +60,7 @@ class RequestFoodService {
                     requestsFound = true
                     
                     if let requestedById = request.requestedBy {
+                        print("inside this to call userid \(requestedById)")
                         self.userService.getUserByID(uid: requestedById) { user in
                             if let user = user {
                                 existingRequest?.requestedUserDetail = user
@@ -128,6 +130,24 @@ class RequestFoodService {
                 print(error.localizedDescription) // Log the error or use another callback for failure
             }
     }
+    func fetchDonationRequests(userId: String, completion: @escaping ([String]?, String?) -> Void) {
+       
+        var donationIds: [String] = []
 
+        reference.child(collectionName).queryOrdered(byChild: "requestedBy").queryEqual(toValue: userId)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                for child in snapshot.children {
+                    if let childSnapshot = child as? DataSnapshot,
+                       let model = RequestFood(snapshot: childSnapshot),
+                       model.requestforId != nil,
+                       model.cancelon == nil {
+                        donationIds.append(model.requestforId!)
+                    }
+                }
+                completion(donationIds, nil)
+            }) { error in
+                completion(nil, error.localizedDescription)
+            }
+    }
 
 }

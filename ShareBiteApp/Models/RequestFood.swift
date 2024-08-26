@@ -32,42 +32,21 @@ class RequestFood : Decodable {
            
            self.requestId = value["requestId"] as? String
            self.requestforId = value["requestforId"] as? String
+           self.requestedBy = value["requestedBy"] as? String
            self.cancelon = value["cancelon"] as? String
-           // Initialize other properties
+           self.cancelby = value["cancelby"] as? String
+          
        }
     // Default initializer
     init() {}
     
-    // Accessor methods (if needed)
-    func getRequestId() -> String? {
-        return requestId
-    }
-    
-    func setRequestId(_ requestId: String?) {
-        self.requestId = requestId
-    }
-    
-    func getRequestedBy() -> String? {
-        return requestedBy
-    }
-    
-    func setRequestedBy(_ requestedBy: String?) {
-        self.requestedBy = requestedBy
-    }
-    
-    func getRequestedon() -> String? {
-        return requestedon
-    }
-    
-    func setRequestedon(_ requestedon: String?) {
-        self.requestedon = requestedon
-    }
-   
+
     func toMapUpdate() -> [String: Any] {
         var result: [String: Any] = [
             "requestId": requestId,
             "requestforId": requestforId,
-            "requestedBy":requestedBy
+            "requestedBy":requestedBy,
+            "requestedon":requestedon
         ]
         return result
     }
