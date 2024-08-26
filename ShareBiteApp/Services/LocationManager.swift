@@ -6,10 +6,7 @@
 //
 
 import FirebaseDatabase
-protocol ListLocationOperationCallback {
-    func onSuccess(_ location: Location)
-    func onFailure(_ error: String)
-}
+
 
 class LocationService {
     private var reference: DatabaseReference
@@ -83,6 +80,21 @@ class LocationService {
             completion(.failure(error))
         }
     }
-
+    func updateLocation(model: Location, completion: @escaping (Result<Void, Error>) -> Void) {
+        model.updatedOn = Utils.getCurrentDatetime()
+        
+        guard let locationId = model.locationId else {
+            completion(.failure(NSError(domain: "UpdateError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Location ID is missing."])))
+            return
+        }
+        
+        reference.child(collectionName).child(locationId).updateChildValues(model.toMapUpdate()) { error, _ in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
 }
 

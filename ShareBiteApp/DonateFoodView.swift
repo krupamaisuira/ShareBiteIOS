@@ -13,7 +13,7 @@ struct DonateFoodView: View {
     @State private var images: [UIImage] = []
     @State private var photoModels: [Photos] = []
     
-    @State private var donationId: String = "donationId123"
+    //@State private var donationId: String = "donationId123"
     @State private var navigateToSuccess: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""

@@ -35,7 +35,23 @@ class DonateFood: Decodable, Identifiable {
         self.location = location
         self.imageUris = imageUris
         self.saveImage = saveImage
-    }
+    } 
+    init(donationId: String, title: String, description: String, bestBefore: String, price: Double, donatedBy: String = "", foodDeleted: Bool = false, createdOn: String = Utils.getCurrentDatetime(), status: Int = FoodStatus.available.rawValue, location: Location? = nil, imageUris: [URL]? = nil, saveImage: [UIImage]? = nil) {
+            self.donationId = donationId
+            self.title = title
+            self.description = description
+            self.bestBefore = bestBefore
+            self.price = price
+            self.donatedBy = ""
+            self.foodDeleted = false
+            self.createdOn = createdOn
+            self.status = status
+            self.location = location
+            self.imageUris = imageUris
+            self.saveImage = saveImage
+            self.uploadedImageUris = nil
+            self.requestedBy = nil
+        }
 
     init?(from dict: [String: Any]) {
         guard let donatedBy = dict["donatedBy"] as? String,
