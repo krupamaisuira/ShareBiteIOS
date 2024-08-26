@@ -21,12 +21,12 @@ struct DonatedFoodListView: View {
                         .padding(.leading, 5)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
-                    Button(action: {
-                        // Navigate to Food Requested view
-                    }) {
-                        Text("Food Requested")
-                    }
+                    NavigationLink(destination: FoodRequestedListView()) {
+                                           Text("Food Requested")
+                                       }
                     .padding(.trailing, 5)
+                    
+                    
                 }
                 .padding(.top, 16)
                 
