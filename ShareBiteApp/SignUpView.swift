@@ -12,11 +12,10 @@ struct SignUpView: View {
     @State private var isConfPasswordVisible: Bool = false
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    @StateObject private var userManager = UserManager()
     @State private var navigateToSignIn = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image("logo")
                     .resizable()
@@ -34,6 +33,11 @@ struct SignUpView: View {
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(10)
+                        .keyboardType(.numberPad) // Show number pad keyboard
+                        .onChange(of: mobileNumber) { newValue in
+                            // Filter out non-numeric characters
+                            mobileNumber = newValue.filter { $0.isNumber }
+                        }
                     
                     TextField("Email Address", text: $emailAddress)
                         .padding()
@@ -124,7 +128,6 @@ struct SignUpView: View {
                 Alert(
                     title: Text("Registration Error"),
                     message: Text(alertMessage),
-//                    hgd
                     dismissButton: .default(Text("OK"))
                 )
             }
@@ -144,10 +147,9 @@ struct SignUpView: View {
             showAlert(message: "Please enter a valid Email Address.")
             return
         }
-                
         if !Utils.isPasswordValid(password) {
-                showAlert(message: "Password must contain at least one letter and one digit.")
-                return
+            showAlert(message: "Password must contain at least one letter and one digit.")
+            return
         }
         if password != confirmPassword {
             showAlert(message: "Passwords do not match.")
@@ -159,33 +161,32 @@ struct SignUpView: View {
         }
         
         Auth.auth().createUser(withEmail: emailAddress, password: password) { authResult, error in
-                if let error = error as NSError?{
+            DispatchQueue.main.async {
+                if let error = error as NSError? {
                     let errorCode = error.code
                     switch errorCode {
-                           case AuthErrorCode.emailAlreadyInUse.rawValue:
-                               showAlert(message: "The email address is already in use.")
-                               return
-                           case AuthErrorCode.weakPassword.rawValue:
-                               showAlert(message: "The password is too weak.")
-                               return
-                           default:
-                               showAlert(message: error.localizedDescription)
-                               return
-                           }
+                    case AuthErrorCode.emailAlreadyInUse.rawValue:
+                        showAlert(message: "The email address is already in use.")
+                    case AuthErrorCode.weakPassword.rawValue:
+                        showAlert(message: "The password is too weak.")
+                    default:
+                        showAlert(message: error.localizedDescription)
+                    }
+                    return
                 }
                 if let user = authResult?.user {
-                    
                     let userID = user.uid
-                    let newUser = Users(id : userID,username: userName, email: emailAddress, mobilenumber: mobileNumber)
-                    userManager.registerUser(_user: newUser)
-                    
-                    navigateToSignIn = true
+                    let newUser = Users(id: userID, username: userName, email: emailAddress, mobilenumber: mobileNumber)
+                    UserManager().registerUser(_user: newUser) { success in
+                        if success {
+                            navigateToSignIn = true
+                        } else {
+                            showAlert(message: "Failed to register user in the system.")
+                        }
+                    }
                 }
-                
             }
-        
-       
-       
+        }
     }
     
     private func showAlert(message: String) {
