@@ -2,9 +2,12 @@ import SwiftUI
 
 struct DashboardView: View {
     @StateObject private var sessionManager = SessionManager.shared
-
+    @State private var donationsCount: Int = 0
+    @State private var collectionsCount: Int = 0
+    private let donateFoodService = DonateFoodService()
+    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 GeometryReader { geometry in
                     ScrollView {
@@ -13,44 +16,51 @@ struct DashboardView: View {
                                 .font(.headline)
                                 .multilineTextAlignment(.center)
 
-                            HStack {
-                                VStack {
-                                    Text("0")
-                                        .font(.largeTitle)
-                                        .fontWeight(.bold)
-                                    Text("Donations")
-                                        .fontWeight(.bold)
-                                    Image(systemName: "heart")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 4)
-                                        .padding(7)
+                            HStack(spacing: 16) {
+                                NavigationLink(destination: ShowRequestHistoryView()) {
+                                        VStack {
+                                            Image(systemName: "heart.fill")
+                                                .resizable()
+                                                .frame(width: 30, height: 30)
+                                                .padding(.top, 8)
+                                            
+                                            Text("\(donationsCount) Donations")
+                                                .font(.system(size: 16))
+                                                .padding(.top, 3)
+                                                .padding(.bottom, 5)
+                                                .foregroundColor(.black)
+                                        }
+                                        .frame(maxWidth: .infinity)
+                                        .background(Color.gray.opacity(0.2))
+                                        .cornerRadius(8)
+                                        .padding(.vertical)
+                                    }
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: ShowRequestHistoryView()) {
+                                    VStack {
+                                        Image(systemName: "hand.raised.fill")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .padding(.top, 8)
+                                        
+                                        Text("\(collectionsCount) Collections")
+                                            .font(.system(size: 16))
+                                            .padding(.top, 3)
+                                            .padding(.bottom, 5)
+                                            .foregroundColor(.black)
+                                    }
+                                    .frame(maxWidth: .infinity)
+                                    .background(Color.gray.opacity(0.2))
+                                    .cornerRadius(8)
+                                    .padding(.vertical)
                                 }
-                                .frame(maxWidth: .infinity)
-                                .background(Color.gray.opacity(0.1))
-
-                                Spacer()
-
-                                VStack {
-                                    Text("0")
-                                        .font(.largeTitle)
-                                        .fontWeight(.bold)
-                                    Text("Collections")
-                                        .fontWeight(.bold)
-                                    Image(systemName: "cart")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 24, height: 4)
-                                        .padding(7)
-                                }
-                                .frame(maxWidth: .infinity)
-                                .background(Color.gray.opacity(0.1))
+                                .buttonStyle(PlainButtonStyle())
                             }
                             .padding()
-                            .cornerRadius(10)
 
                             Text("We encourage diversity in donations to ensure that we can meet the nutritional needs and dietary restrictions of everyone we serve.")
-                                .padding(12)
+                                .padding(.horizontal, 12)
                                 .multilineTextAlignment(.leading)
                                 .lineLimit(nil)
                                 .fixedSize(horizontal: false, vertical: true)
@@ -70,14 +80,13 @@ struct DashboardView: View {
 
                             NavigationLink(destination: DonateFoodView()) {
                                 Text("Donate Food")
-                                    .frame(maxWidth: .infinity, maxHeight: 10)
+                                    .frame(maxWidth: .infinity)
                                     .padding()
                                     .background(Color.cyan)
                                     .foregroundColor(.white)
                                     .cornerRadius(10)
                             }
                             .padding()
-                            .cornerRadius(10)
 
                             Text("News")
                                 .font(.headline)
@@ -102,12 +111,26 @@ struct DashboardView: View {
                     }
                 }
             }
-            .edgesIgnoringSafeArea(.bottom)
-            .navigationTitle("Dashboard")
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+//            .edgesIgnoringSafeArea(.bottom)
+//            .navigationTitle("Dashboard")
+//            .navigationBarHidden(true)
+//            .navigationBarBackButtonHidden(true)
+            .onAppear(perform: loadData)
         }
     }
+    private func loadData() {
+        guard let userId = sessionManager.getCurrentUser()?.id else { return }
+
+           donateFoodService.fetchReport(userId: userId) { result in
+               switch result {
+               case .success(let report):
+                   donationsCount = report.donations
+                   collectionsCount = report.collections
+               case .failure(let error):
+                   print("Error fetching report: \(error.localizedDescription)")
+               }
+           }
+       }
 }
 
 struct DashboardView_Preview: PreviewProvider {

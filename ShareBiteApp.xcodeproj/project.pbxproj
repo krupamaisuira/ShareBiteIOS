@@ -12,6 +12,7 @@
 		0122064B2C7A16F10083BCA1 /* FoodStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122064A2C7A16F10083BCA1 /* FoodStatus.swift */; };
 		0122064D2C7A30300083BCA1 /* DonatedFoodDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122064C2C7A30300083BCA1 /* DonatedFoodDetailView.swift */; };
 		0122064F2C7BF0960083BCA1 /* ShowRequestHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0122064E2C7BF0960083BCA1 /* ShowRequestHistoryView.swift */; };
+		012206512C7C1F120083BCA1 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012206502C7C1F120083BCA1 /* Report.swift */; };
 		CE160F8E2C46A61300903B9A /* BottomNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */; };
 		CE160F902C46AD9300903B9A /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8F2C46AD9300903B9A /* HeaderView.swift */; };
 		CE160F942C4D59B900903B9A /* request_food.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F932C4D59B900903B9A /* request_food.swift */; };
@@ -77,6 +78,7 @@
 		0122064A2C7A16F10083BCA1 /* FoodStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStatus.swift; sourceTree = "<group>"; };
 		0122064C2C7A30300083BCA1 /* DonatedFoodDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonatedFoodDetailView.swift; sourceTree = "<group>"; };
 		0122064E2C7BF0960083BCA1 /* ShowRequestHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowRequestHistoryView.swift; sourceTree = "<group>"; };
+		012206502C7C1F120083BCA1 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		CE160F8D2C46A61300903B9A /* BottomNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomNavigationView.swift; sourceTree = "<group>"; };
 		CE160F8F2C46AD9300903B9A /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		CE160F932C4D59B900903B9A /* request_food.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = request_food.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		CE33BD312C232C1300732195 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				012206502C7C1F120083BCA1 /* Report.swift */,
 				CE33BD332C232C5400732195 /* Users.swift */,
 				CE9C19FC2C62DBE600BCA9C8 /* Location.swift */,
 				CE9C1A022C62E9AB00BCA9C8 /* Photo.swift */,
@@ -420,6 +423,7 @@
 				CE9C1A0B2C74F75A00BCA9C8 /* PhotoManager.swift in Sources */,
 				CE33BCA72C19D4C700732195 /* SignUpView.swift in Sources */,
 				CE9C1A132C75111300BCA9C8 /* RequestFoodManager.swift in Sources */,
+				012206512C7C1F120083BCA1 /* Report.swift in Sources */,
 				CE33BD492C3485CF00732195 /* ChangePasswordView.swift in Sources */,
 				CE9C19EC2C62987200BCA9C8 /* RequestFoodDetailView.swift in Sources */,
 				012206492C78FE020083BCA1 /* DonatedFoodCardView.swift in Sources */,
