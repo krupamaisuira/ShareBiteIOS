@@ -43,6 +43,8 @@ struct RequestFoodListView: View {
                     .padding(.top, 10)
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .onAppear {
                 fetchDonatedFoods()
             }

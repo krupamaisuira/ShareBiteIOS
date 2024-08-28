@@ -59,6 +59,8 @@ struct ForgotPasswordView: View {
                 .padding(.bottom, 200)
             }
             .background(Color.white)
+            .navigationBarHidden(true)
+            
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Password Reset Error"),
@@ -67,6 +69,7 @@ struct ForgotPasswordView: View {
                 )
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
 
     private func forgotPassword() {

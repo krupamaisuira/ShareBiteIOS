@@ -82,6 +82,7 @@ struct ChangePasswordView: View {
             }
             .navigationBarTitle("")
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
         }
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {

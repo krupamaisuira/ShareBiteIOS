@@ -17,7 +17,7 @@ struct ProfileView: View {
     @State private var notificationsEnabled = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(alignment: .leading) {
                 HStack {
                     Image(systemName: "person.circle.fill")
@@ -140,6 +140,7 @@ struct ProfileView: View {
             }
             .navigationTitle("")
             .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .background(
                 NavigationLink(
                     destination: SignInView(),
@@ -148,7 +149,7 @@ struct ProfileView: View {
                 )
             )
         }
-        .navigationViewStyle(StackNavigationViewStyle()) 
+       // .navigationViewStyle(StackNavigationViewStyle()) 
     }
 }
 

@@ -111,6 +111,8 @@ struct DashboardView: View {
                     }
                 }
             }
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
 //            .edgesIgnoringSafeArea(.bottom)
 //            .navigationTitle("Dashboard")
 //            .navigationBarHidden(true)

@@ -219,6 +219,8 @@ struct DonatedFoodDetailView: View {
             .cornerRadius(8)
             .padding(.horizontal, 16) // Added padding
         }
+        .navigationBarHidden(true)               
+        .navigationBarBackButtonHidden(true)
         .onAppear {
             fetchDonationDetail()
         }

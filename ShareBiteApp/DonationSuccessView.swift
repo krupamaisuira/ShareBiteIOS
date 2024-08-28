@@ -62,7 +62,9 @@ struct DonationSuccessView: View {
                 .padding(.top, 30)
             }
             .padding(16)
-            .background(Color.white) // Or any background color of your choice
+            .background(Color.white)
+            .navigationBarHidden(true)               
+            .navigationBarBackButtonHidden(true)
         }
     }
     private func getShareItems() -> [Any] {

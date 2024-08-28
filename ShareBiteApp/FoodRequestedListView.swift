@@ -13,11 +13,13 @@ struct FoodRequestedListView: View {
                 Text("Food Requested")
                     .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.black)
-                    .padding(.leading, 16)
+                    .padding(.leading, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.top, 16)
 
                 Divider()
                     .padding(.horizontal, 16)
+                    .padding(.top,4)
 
                 Text("Welcome to your food donation user requested list page! Your generosity can make a big difference in the lives of those in need")
                     .font(.system(size: 14))
@@ -37,7 +39,9 @@ struct FoodRequestedListView: View {
                 }
             }
             .navigationTitle("Food Requested")
-            .navigationBarTitleDisplayMode(.inline) // Use .inline to keep the title compact
+            .navigationBarTitleDisplayMode(.inline) 
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .onAppear {
                 fetchDonatedFoods()
             }

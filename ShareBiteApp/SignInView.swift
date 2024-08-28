@@ -88,6 +88,8 @@ struct SignInView: View {
                 .padding(.bottom, 200)
             }
             .background(Color.white)
+            .navigationBarHidden(true)
+            
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Invalid email address and password"),
@@ -103,6 +105,7 @@ struct SignInView: View {
                                 }
                         })
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     private func loginUser() {
