@@ -3,7 +3,7 @@ import SwiftUI
 struct DonationSuccessView: View {
     @State private var isShareSheetPresented = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 16) {
                 Image("logo")
                     .resizable()

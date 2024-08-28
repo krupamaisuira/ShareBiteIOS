@@ -19,24 +19,26 @@ struct ChangePasswordView: View {
     @State private var passwordChanged: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 Image("logo") // Replace with your logo image name
                     .resizable()
                     .scaledToFit()
                     .frame(width: 200, height: 200)
-                    .padding(10)
+                   // .padding(10)
+                
                 
                 Text("Change Password")
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .bold()
-                    .padding(.bottom, 20)
+                    //.padding(.bottom, 2)
                 
                 Text("Please enter your new password and confirm it by entering it again.")
                     .font(.subheadline)
                     .foregroundColor(.black)
                     .padding(20)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 VStack(spacing: 15) {
                     ToggleableSecureField(text: $currentPassword, placeholder: "Current Password")
@@ -56,7 +58,7 @@ struct ChangePasswordView: View {
                         .cornerRadius(10)
                         .padding(.horizontal, 30)
                 }
-                .padding(.vertical, 20)
+                .padding(.vertical, 10)
                 
                 NavigationLink(destination: ProfileView(), isActive: $navigateToProfile) {
                     EmptyView()
@@ -68,9 +70,9 @@ struct ChangePasswordView: View {
                     Text("Back to Profile")
                         .foregroundColor(.blue)
                 }
-                .padding(.top, 10)
+               // .padding(.top, 10)
                 
-                Spacer()
+               // Spacer()
             }
             .background(Color.white)
             .alert(isPresented: $showAlert) {
@@ -81,10 +83,11 @@ struct ChangePasswordView: View {
                 )
             }
             .navigationBarTitle("")
-            .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
+            
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true)
+        .navigationBarBackButtonHidden(true)
+       // .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             // Reset states when view appears
             currentPassword = ""
