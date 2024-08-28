@@ -22,6 +22,7 @@ struct SignUpView: View {
                     .scaledToFit()
                     .frame(width: 200, height: 200)
                     .padding(10)
+                    .padding(.top,50)
                 
                 VStack(spacing: 15) {
                     TextField("User Name", text: $userName)
@@ -33,9 +34,8 @@ struct SignUpView: View {
                         .padding()
                         .background(Color.gray.opacity(0.2))
                         .cornerRadius(10)
-                        .keyboardType(.numberPad) // Show number pad keyboard
+                        .keyboardType(.numberPad)
                         .onChange(of: mobileNumber) { newValue in
-                            // Filter out non-numeric characters
                             mobileNumber = newValue.filter { $0.isNumber }
                         }
                     
@@ -124,6 +124,7 @@ struct SignUpView: View {
                 .padding(.bottom, 120)
             }
             .background(Color.white)
+            .navigationBarHidden(true) // Hide the navigation bar
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text("Registration Error"),
@@ -132,6 +133,7 @@ struct SignUpView: View {
                 )
             }
         }
+        .navigationBarBackButtonHidden(true) // Ensure the back button is hidden
     }
     
     private func registerUser() {

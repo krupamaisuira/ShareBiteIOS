@@ -12,7 +12,7 @@ struct DonatedFoodListView: View {
     @ObservedObject private var sessionManager = SessionManager.shared
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack(spacing: 0) {
                 HStack {
                     Text("Donations Food")
@@ -56,6 +56,9 @@ struct DonatedFoodListView: View {
                     .padding(.top, 10)
                 }
             }
+           
+            .navigationBarHidden(true)
+            .navigationBarBackButtonHidden(true)
             .onAppear {
                 fetchDonatedFoods()
             }

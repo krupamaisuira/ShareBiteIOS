@@ -125,6 +125,8 @@ struct request_food: View {
                                 }
             }
         }
+        .navigationBarHidden(true)               
+               .navigationBarBackButtonHidden(true)
     }
 }
 
