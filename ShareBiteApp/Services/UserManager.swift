@@ -158,5 +158,23 @@ class UserManager : ObservableObject{
         }
     }
 
+    func updateUser(_ user: Users, completion: @escaping (Bool) -> Void) {
+        let itemRef = database.child(_collection).child(user.id)
+    
+        let userData: [String: Any] = [
+            "username": user.username,
+            "email": user.email,
+            "mobilenumber": user.mobilenumber
+        ]
         
+        itemRef.updateChildValues(userData) { error, _ in
+            if let error = error {
+                print("Error updating user data: \(error.localizedDescription)")
+                completion(false)
+            } else {
+                completion(true)
+            }
+        }
+    }
+
 }

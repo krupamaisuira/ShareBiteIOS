@@ -34,6 +34,7 @@ struct ProfileView: View {
                     }
                 }
                 .padding(5)
+                .padding(.top,15)
                 
                 Divider()
                     .background(Color.gray)
@@ -70,6 +71,16 @@ struct ProfileView: View {
                 }
                 .padding()
                 
+                Divider()
+                    .background(Color.gray)
+                
+                NavigationLink(destination: EditProfileView()) {
+                    HStack {
+                        Text("Edit Profile")
+                            .foregroundColor(.black)
+                    }
+                }
+                .padding()
                 Divider()
                     .background(Color.gray)
                 

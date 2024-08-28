@@ -21,224 +21,227 @@ struct DonateFoodView: View {
     @State private var showDatePicker = false
     @ObservedObject private var sessionManager = SessionManager.shared
     var body: some View {
-        VStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    Text("Join the Fight Against Hunger")
-                        .font(.headline)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                    
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Photo(s)")
-                            .font(.system(size: 14))
-                            .fontWeight(.bold)
-                            .padding(.leading)
+        NavigationStack {
+            VStack {
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 16) {
+                        Text("Join the Fight Against Hunger")
+                            .font(.headline)
+                            .frame(maxWidth: .infinity, alignment: .center)
                         
-                        VStack {
-                            Spacer(minLength: 16)
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Photo(s)")
+                                .font(.system(size: 14))
+                                .fontWeight(.bold)
+                                .padding(.leading)
                             
-                            HStack {
-                                ForEach(images.indices, id: \.self) { index in
-                                    ZStack(alignment: .topTrailing) {
-                                        Image(uiImage: images[index])
-                                            .resizable()
-                                            .frame(width: 100, height: 100)
-                                            .clipShape(RoundedRectangle(cornerRadius: 8))
-                                        
-                                        Button(action: {
-                                            removeImage(at: index)
-                                        }) {
-                                            Image(systemName: "xmark.circle.fill")
-                                                .resizable()
-                                                .frame(width: 20, height: 20)
-                                                .foregroundColor(.red)
-                                        }
-                                    }
-                                }
+                            VStack {
+                                Spacer(minLength: 16)
                                 
-                                if images.count < 3 {
-                                    Image(systemName: "plus.circle.fill")
-                                        .resizable()
-                                        .frame(width: 60, height: 60)
-                                        .foregroundColor(.orange)
-                                        .padding()
-                                        .onTapGesture {
-                                            if !isRunningInPreview() {
-                                                showImagePicker.toggle()
+                                HStack {
+                                    ForEach(images.indices, id: \.self) { index in
+                                        ZStack(alignment: .topTrailing) {
+                                            Image(uiImage: images[index])
+                                                .resizable()
+                                                .frame(width: 100, height: 100)
+                                                .clipShape(RoundedRectangle(cornerRadius: 8))
+                                            
+                                            Button(action: {
+                                                removeImage(at: index)
+                                            }) {
+                                                Image(systemName: "xmark.circle.fill")
+                                                    .resizable()
+                                                    .frame(width: 20, height: 20)
+                                                    .foregroundColor(.red)
                                             }
                                         }
+                                    }
+                                    
+                                    if images.count < 3 {
+                                        Image(systemName: "plus.circle.fill")
+                                            .resizable()
+                                            .frame(width: 60, height: 60)
+                                            .foregroundColor(.orange)
+                                            .padding()
+                                            .onTapGesture {
+                                                if !isRunningInPreview() {
+                                                    showImagePicker.toggle()
+                                                }
+                                            }
+                                    }
                                 }
                             }
+                            
+                            HStack {
+                                Spacer()
+                                Text("3 photos max")
+                                    .font(.system(size: 12))
+                                    .foregroundColor(.gray)
+                            }
+                            .padding(.leading)
                         }
+                        
+                        Divider().background(Color.gray).padding(.horizontal, 5)
+                        
+                        HStack {
+                            Image(systemName: "paperplane.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(.blue)
+                                .onTapGesture {
+                                    showAddressPopup.toggle()
+                                }
+                            
+                            Text(location?.address ?? "Add Address")
+                                .font(.system(size: 16))
+                                .fontWeight(.bold)
+                        }
+                        .padding(.horizontal)
+                        
+                        Divider().background(Color.gray).padding(.horizontal, 5)
+                        
+                        Text("Title")
+                            .fontWeight(.bold)
+                            .font(.system(size: 16))
+                            .padding(.leading)
+                        
+                        TextField("E.g. sandwich, cakes, vegetables", text: $foodTitle)
+                            .font(.system(size: 16))
+                            .padding(.vertical, 8)
+                            .padding(.leading, 8)  // Padding for hint text
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .padding(.horizontal)
+                        
+                        Divider().background(Color.gray).padding(.horizontal, 5)
+                        
+                        Text("Description")
+                            .fontWeight(.bold)
+                            .font(.system(size: 16))
+                            .padding(.leading)
+                        
+                        TextEditor(text: $description)
+                            .padding()
+                            .background(Color.white)
+                            .border(Color.gray, width: 1)
+                            .frame(width: 350, height: 100)
+                            .cornerRadius(8)
+                            .padding(.horizontal)
+                        
+                        Button(action: {
+                            showDatePicker.toggle()
+                        }) {
+                            HStack {
+                                TextField("Best before", text: $bestBefore)
+                                    .font(.system(size: 16))
+                                    .padding(.vertical, 8)
+                                    .padding(.leading, 8)
+                                    .background(Color.white)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 8)
+                                            .stroke(Color.gray, lineWidth: 1)
+                                    )
+                                    .disabled(true)  // Prevent direct editing
+                                    .padding(.horizontal)
+                            }
+                        }
+                        .sheet(isPresented: $showDatePicker) {
+                            VStack {
+                                DatePicker("Select Date and Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
+                                    .datePickerStyle(WheelDatePickerStyle())
+                                    .labelsHidden()
+                                    .padding()
+                                
+                                Button("Done") {
+                                    let formatter = DateFormatter()
+                                    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+                                    //  formatter.dateFormat = "MMM d, yyyy h:mm a"
+                                    //                                                    formatter.dateStyle = .medium
+                                    //                                                    formatter.timeStyle = .short
+                                    self.bestBefore = formatter.string(from: selectedDate)
+                                    self.showDatePicker = false
+                                }
+                                .padding()
+                            }
+                        }
+                        
+                        TextField("Price", text: $price)
+                            .font(.system(size: 16))
+                            .padding(.vertical, 8)
+                            .padding(.leading, 8)  // Padding for hint text
+                            .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color.gray, lineWidth: 1)
+                            )
+                            .padding(.horizontal)
+                        
+                        Text("Price is optional")
+                            .font(.system(size: 12))
+                            .foregroundColor(.gray)
+                            .padding(.trailing, 20)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         
                         HStack {
                             Spacer()
-                            Text("3 photos max")
-                                .font(.system(size: 12))
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.leading)
-                    }
-                    
-                    Divider().background(Color.gray).padding(.horizontal, 5)
-                    
-                    HStack {
-                        Image(systemName: "paperplane.fill")
-                            .resizable()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                showAddressPopup.toggle()
+                            Button(action: {
+                                validateAndSave()
+                            }) {
+                                Text("Donate")
+                                    .frame(maxWidth: .infinity)
+                                    .padding()
+                                    .background(Color.cyan)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(10)
+                                    .font(.headline)
                             }
+                            .padding(.horizontal)
+                            .padding(.bottom)
+                            Spacer()
+                        }
                         
-                        Text(location?.address ?? "Add Address")
-                            .font(.system(size: 16))
-                            .fontWeight(.bold)
-                    }
-                    .padding(.horizontal)
-                    
-                    Divider().background(Color.gray).padding(.horizontal, 5)
-                    
-                    Text("Title")
-                        .fontWeight(.bold)
-                        .font(.system(size: 16))
-                        .padding(.leading)
-                    
-                    TextField("E.g. sandwich, cakes, vegetables", text: $foodTitle)
-                        .font(.system(size: 16))
-                        .padding(.vertical, 8)
-                        .padding(.leading, 8)  // Padding for hint text
-                        .background(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .padding(.horizontal)
-                    
-                    Divider().background(Color.gray).padding(.horizontal, 5)
-                    
-                    Text("Description")
-                        .fontWeight(.bold)
-                        .font(.system(size: 16))
-                        .padding(.leading)
-                    
-                    TextEditor(text: $description)
-                        .padding()
-                        .background(Color.white)
-                        .border(Color.gray, width: 1)
-                        .frame(width: 350, height: 100)
-                        .cornerRadius(8)
-                        .padding(.horizontal)
-                    
-                    Button(action: {
-                                            showDatePicker.toggle()
-                                        }) {
-                                            HStack {
-                                                TextField("Best before", text: $bestBefore)
-                                                    .font(.system(size: 16))
-                                                    .padding(.vertical, 8)
-                                                    .padding(.leading, 8)
-                                                    .background(Color.white)
-                                                    .overlay(
-                                                        RoundedRectangle(cornerRadius: 8)
-                                                            .stroke(Color.gray, lineWidth: 1)
-                                                    )
-                                                    .disabled(true)  // Prevent direct editing
-                                                    .padding(.horizontal)
-                                            }
-                                        }
-                                        .sheet(isPresented: $showDatePicker) {
-                                            VStack {
-                                                DatePicker("Select Date and Time", selection: $selectedDate, displayedComponents: [.date, .hourAndMinute])
-                                                    .datePickerStyle(WheelDatePickerStyle())
-                                                    .labelsHidden()
-                                                    .padding()
-                                                
-                                                Button("Done") {
-                                                    let formatter = DateFormatter()
-                                                    formatter.dateFormat = "yyyy-MM-dd HH:mm"
-                                                  //  formatter.dateFormat = "MMM d, yyyy h:mm a"
-//                                                    formatter.dateStyle = .medium
-//                                                    formatter.timeStyle = .short
-                                                    self.bestBefore = formatter.string(from: selectedDate)
-                                                    self.showDatePicker = false
-                                                }
-                                                .padding()
-                                            }
-                                        }
-                    
-                    TextField("Price", text: $price)
-                        .font(.system(size: 16))
-                        .padding(.vertical, 8)
-                        .padding(.leading, 8)  // Padding for hint text
-                        .background(Color.white)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 8)
-                                .stroke(Color.gray, lineWidth: 1)
-                        )
-                        .padding(.horizontal)
-                    
-                    Text("Price is optional")
-                        .font(.system(size: 12))
-                        .foregroundColor(.gray)
-                        .padding(.trailing, 20)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            validateAndSave()
-                        }) {
-                            Text("Donate")
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color.cyan)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                                .font(.headline)
+                        NavigationLink(destination: DonationSuccessView(), isActive: $navigateToSuccess) {
+                            EmptyView()
                         }
-                        .padding(.horizontal)
-                        .padding(.bottom)
-                        Spacer()
                     }
-                    
-                    NavigationLink(destination: DonationSuccessView(), isActive: $navigateToSuccess) {
-                        EmptyView()
-                    }
+                    .padding()
                 }
-                .padding()
-            }
-            .sheet(isPresented: $showImagePicker) {
-                if isRunningInPreview() {
-                    MockImagePicker()
-                } else {
-                    ImagePicker { image in
-                        if images.count < 3 {
-                            images.append(image)
+                .sheet(isPresented: $showImagePicker) {
+                    if isRunningInPreview() {
+                        MockImagePicker()
+                    } else {
+                        ImagePicker { image in
+                            if images.count < 3 {
+                                images.append(image)
+                            }
+                            showImagePicker = false
                         }
-                        showImagePicker = false
                     }
                 }
-            }
-            .overlay(
-                Group {
-                    if showAddressPopup {
-                        ChooseAddressView(show: $showAddressPopup, selectedLocation: $location)
+                .overlay(
+                    Group {
+                        if showAddressPopup {
+                            ChooseAddressView(show: $showAddressPopup, selectedLocation: $location)
+                        }
                     }
+                )
+                .onAppear {
+                    location = nil
                 }
-            )
-            .onAppear {
-                location = nil
+                
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Validation Error"),
+                        message: Text(alertMessage),
+                        dismissButton: .default(Text("OK"))
+                    )
+                }
             }
             .navigationBarHidden(true)
-            .navigationBarBackButtonHidden(true)
-            .alert(isPresented: $showAlert) {
-                           Alert(
-                               title: Text("Validation Error"),
-                               message: Text(alertMessage),
-                               dismissButton: .default(Text("OK"))
-                           )
-                       }
+           .navigationBarBackButtonHidden(true)
         }
     }
     
